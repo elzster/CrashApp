@@ -25,8 +25,12 @@ from flask_sqlalchemy import SQLAlchemy
 <<<<<<< HEAD
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///ppop.sqlite"
 =======
+<<<<<<< HEAD
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///ppop.sqlite"
+=======
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db.sqlite"
 >>>>>>> 79174aaca6b7c748be4ab999b0f706c22b3e57ce
+>>>>>>> 9bc2711de6615c6d3ac6c4e517ed0aea521f1705
 
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
@@ -35,9 +39,13 @@ db = SQLAlchemy(app)
 <<<<<<< HEAD
 from .models import crashdata
 =======
+<<<<<<< HEAD
+from .models import crashdata
+=======
 from .models import Pet
 
 >>>>>>> 79174aaca6b7c748be4ab999b0f706c22b3e57ce
+>>>>>>> 9bc2711de6615c6d3ac6c4e517ed0aea521f1705
 
 # create route that renders index.html template
 @app.route("/")
@@ -47,6 +55,9 @@ def home():
 
 # create route that renders maps.html template
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9bc2711de6615c6d3ac6c4e517ed0aea521f1705
 # @app.route("/maps")
 # def maps():
 #     return render_template("map.html")
@@ -99,6 +110,8 @@ def pals():
     # }]
 
     return jsonify(results)
+<<<<<<< HEAD
+=======
 =======
 @app.route("/maps")
 def maps():
@@ -153,6 +166,7 @@ def pals():
 
     return jsonify(pet_data)
 >>>>>>> 79174aaca6b7c748be4ab999b0f706c22b3e57ce
+>>>>>>> 9bc2711de6615c6d3ac6c4e517ed0aea521f1705
 
 
 if __name__ == "__main__":
