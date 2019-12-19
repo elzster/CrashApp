@@ -23,7 +23,7 @@ mapkey = os.environ.get('MAPKEY', '') or "CREATE MAPKEY ENV"
 
 from flask_sqlalchemy import SQLAlchemy
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///ppop.sqlite"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db/nyc.sqlite"
 
 
 
@@ -38,6 +38,10 @@ from .models import crashdata
 def home():
     return render_template("index.html")
 
+@app.route("/maps/")
+def maps():
+    return render_template("cloropleth.html")
+
 
 # @app.route("/maps")
 # def maps():
@@ -51,24 +55,24 @@ def home():
 #     return jsonify(config)
 
 # Query the database and send the jsonified results
-@app.route("/send", methods=["GET", "POST"])
-def send():
-    if request.method == "POST":
-        name = request.form["petName"]
-        lat = request.form["petLat"]
-        lon = request.form["petLon"]
+# @app.route("/send", methods=["GET", "POST"])
+# def send():
+#     if request.method == "POST":
+#         name = request.form["petName"]
+#         lat = request.form["petLat"]
+#         lon = request.form["petLon"]
 
-        pet = Pet(name=name, lat=lat, lon=lon)
-        db.session.add(pet)
-        db.session.commit()
-        return redirect("/", code=302)
+#         pet = Pet(name=name, lat=lat, lon=lon)
+#         db.session.add(pet)
+#         db.session.commit()
+#         return redirect("/", code=302)
 
 #     return render_template("form.html")
 
 
-@app.route("/api/")
-def pals():
-    results = db.session.query(nyctable.latitude).all()
+# @app.route("/api/")
+# def pals():
+#     results = db.session.query(nyctable.latitude).all()
 
     # hover_text = [result[0] for result in results]
     # lat = [result[1] for result in results]
@@ -90,7 +94,7 @@ def pals():
     #     }
     # }]
 
-    return jsonify(results)
+    # return jsonify(results)
     
 if __name__ == "__main__":
     app.run()

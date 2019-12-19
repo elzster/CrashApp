@@ -22,7 +22,6 @@ function createFeatures(accidentData) {
 
 function createMap(accidents) {
   // Define streetmap and darkmap layers
-  // Define streetmap and darkmap layers
   var streetmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
@@ -41,7 +40,6 @@ function createMap(accidents) {
   var baseMaps = {
     "Dark Map": darkmap,
     "Street Map": streetmap
-    // "Dark Map": darkmap
   };
 
   // Create overlay object to hold our overlay layer
