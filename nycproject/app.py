@@ -51,17 +51,17 @@ def home():
 #     return jsonify(config)
 
 # Query the database and send the jsonified results
-# @app.route("/send", methods=["GET", "POST"])
-# def send():
-#     if request.method == "POST":
-#         name = request.form["petName"]
-#         lat = request.form["petLat"]
-#         lon = request.form["petLon"]
+@app.route("/send", methods=["GET", "POST"])
+def send():
+    if request.method == "POST":
+        name = request.form["petName"]
+        lat = request.form["petLat"]
+        lon = request.form["petLon"]
 
-#         pet = Pet(name=name, lat=lat, lon=lon)
-#         db.session.add(pet)
-#         db.session.commit()
-#         return redirect("/", code=302)
+        pet = Pet(name=name, lat=lat, lon=lon)
+        db.session.add(pet)
+        db.session.commit()
+        return redirect("/", code=302)
 
 #     return render_template("form.html")
 
