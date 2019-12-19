@@ -23,7 +23,7 @@ mapkey = os.environ.get('MAPKEY', '') or "CREATE MAPKEY ENV"
 
 from flask_sqlalchemy import SQLAlchemy
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///ppop.sqlite"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db/nyc.sqlite"
 
 
 
@@ -37,6 +37,10 @@ from .models import crashdata
 @app.route("/")
 def home():
     return render_template("index.html")
+
+@app.route("/maps/")
+def maps():
+    return render_template("cloropleth.html")
 
 
 # @app.route("/maps")
@@ -66,9 +70,9 @@ def home():
 #     return render_template("form.html")
 
 
-@app.route("/api/")
-def pals():
-    results = db.session.query(nyctable.latitude).all()
+# @app.route("/api/")
+# def pals():
+#     results = db.session.query(nyctable.latitude).all()
 
     # hover_text = [result[0] for result in results]
     # lat = [result[1] for result in results]
@@ -90,7 +94,7 @@ def pals():
     #     }
     # }]
 
-    return jsonify(results)
+    # return jsonify(results)
     
 if __name__ == "__main__":
     app.run()
