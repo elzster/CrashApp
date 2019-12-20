@@ -8,6 +8,7 @@ class crashdata(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     crash_date = db.Column(db.Date)
     crash_time = db.Column(db.Float)
+    borough = db.Column(db.Text)
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
     on_street_name = db.Column(db.Text)
