@@ -62,71 +62,31 @@ def maps():
 def linegraph():
     return render_template("linegraph.html")
 
-
+###Works##
 @app.route("/test")
 def test():
-    """Return a list of sample names."""
+    """Return the list of records in Table"""
     # Use Pandas to perform the sql query
     stmt = db.session.query(crashdata).statement
-    # df = pd.read_sql("select * from nyctable WHERE borough='QUEENS'")
+    
     # Return a list of the column names (sample names)
     df = pd.read_sql_query(stmt, db.session.bind)
     # print(df.keys())
 
     # return ("Doesn't Break")
-    myjson = df.to_json(orient='table')
+    myjson = df.to_json(orient='records')
     
-    return (jsonify(myjson))
+    return (myjson)
 
 # create route that gives us our map key
 @app.route("/testSQL")
 def sqlTest():
    
     # return (nycTestData)
-    print(crashdata.filter(borough.endswith('QUEENS')).all())
+    # print(crashdata.filter(borough.endswith('QUEENS')).all())
 
     return render_template('index.html')
-# Query the database and send the jsonified results
-# @app.route("/send", methods=["GET", "POST"])
-# def send():
-#     if request.method == "POST":
-#         name = request.form["petName"]
-#         lat = request.form["petLat"]
-#         lon = request.form["petLon"]
 
-#         pet = Pet(name=name, lat=lat, lon=lon)
-#         db.session.add(pet)
-#         db.session.commit()
-#         return redirect("/", code=302)
-
-#     return render_template("form.html")
-
-
-# @app.route("/api/")
-# def pals():
-#     results = db.session.query(nyctable.latitude).all()
-
-    # hover_text = [result[0] for result in results]
-    # lat = [result[1] for result in results]
-    # lon = [result[2] for result in results]
-
-    # pet_data = [{
-    #     "type": "scattergeo",
-    #     "locationmode": "USA-states",
-    #     "lat": lat,
-    #     "lon": lon,
-    #     "text": hover_text,
-    #     "hoverinfo": "text",
-    #     "marker": {
-    #         "size": 50,
-    #         "line": {
-    #             "color": "rgb(8,8,8)",
-    #             "width": 1
-    #         },
-    #     }
-    # }]
-
-    # return jsonify(results)
     
 if __name__ == "__main__":
     app.run()
