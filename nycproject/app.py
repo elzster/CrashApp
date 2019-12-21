@@ -63,8 +63,8 @@ def linegraph():
     return render_template("linegraph.html")
 
 ###Works##
-@app.route("/test")
-def test():
+@app.route("/datafile/")
+def datafile():
     """Return the list of records in Table"""
     # Use Pandas to perform the sql query
     stmt = db.session.query(crashdata).statement
@@ -79,13 +79,10 @@ def test():
     return (myjson)
 
 # create route that gives us our map key
-@app.route("/testSQL")
-def sqlTest():
+@app.route("/bargraph")
+def bargraph():
    
-    # return (nycTestData)
-    # print(crashdata.filter(borough.endswith('QUEENS')).all())
-
-    return render_template('index.html')
+    return render_template('bargraph.html')
 
     
 if __name__ == "__main__":
