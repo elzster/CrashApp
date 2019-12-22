@@ -39,7 +39,8 @@ d3.json(nycData).then( data =>{
   //to parse data from record
   console.log((data[0].borough));
 
-  console.log(data[0].crash_date);
+  //parses date line into usable date.
+  console.log(((data[0].crash_date)));
   console.log((data[0].crash_time));
 
   //street name variable
