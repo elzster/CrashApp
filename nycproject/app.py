@@ -38,14 +38,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "s
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
 db = SQLAlchemy(app)
 
-from .models import crashdata
+from .models import crashdata, crashdata1
+
 
 # reflect an existing database into a new model
 Base = automap_base()
 # reflect the tables
 Base.prepare(db.engine, reflect=True)
 
-nycPlot = Base.classes.nyctable
+# nycPlot = Base.classes.nyctable
 
 
 # create route that renders index.html template
@@ -63,11 +64,26 @@ def linegraph():
     return render_template("linegraph.html")
 
 ###Works##
-@app.route("/datafile/")
-def datafile():
+@app.route("/datafile1/")
+def datafile1():
     """Return the list of records in Table"""
     # Use Pandas to perform the sql query
     stmt = db.session.query(crashdata).statement
+    
+    # Return a list of the column names (sample names)
+    df = pd.read_sql_query(stmt, db.session.bind)
+    # print(df.keys())
+
+    # return ("Doesn't Break")
+    myjson = df.to_json(orient='records')
+    
+    return (myjson)
+
+@app.route("/datafile2/")
+def datafile2():
+    """Return the list of records in Table"""
+    # Use Pandas to perform the sql query
+    stmt = db.session.query(crashdata1).statement
     
     # Return a list of the column names (sample names)
     df = pd.read_sql_query(stmt, db.session.bind)
