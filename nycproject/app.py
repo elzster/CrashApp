@@ -6,7 +6,6 @@ from flask import (
     jsonify,
     request,
     redirect)
-import sqlite3
 import pandas as pd
 import numpy as np
 import sqlalchemy
