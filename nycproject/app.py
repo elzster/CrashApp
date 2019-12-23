@@ -16,6 +16,8 @@ from sqlalchemy import create_engine
 import sqlite3
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask import json
+from flask import url_for
 
 #################################################
 # Flask Setup
@@ -34,8 +36,7 @@ mapkey = os.environ.get('MAPKEY', '') or "CREATE MAPKEY ENV"
 from flask_sqlalchemy import SQLAlchemy
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db/nyc.sqlite"
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/nyc.sqlite"
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
+
 db = SQLAlchemy(app)
 
 from .models import crashdata, crashdata1
@@ -46,12 +47,12 @@ Base = automap_base()
 # reflect the tables
 Base.prepare(db.engine, reflect=True)
 
-# nycPlot = Base.classes.nyctable
-
+#####################ROUTES####################
 
 # create route that renders index.html template
 @app.route("/")
 def home():
+
     return render_template("index.html")
 
 #Test Route for Cloropleth Mapping
@@ -59,37 +60,45 @@ def home():
 def maps():
     return render_template("cloropleth.html")
 
-@app.route("/line/")
-def linegraph():
-    return render_template("linegraph.html")
+################################################
+##Route for GeoJson Data for Cloropleth Maps ###
+################################################
+@app.route("/geojson/")
+def showjson():
 
-###Works##
+    filename = os.path.join(app.static_folder, 'js', 'cartodb.geojson')
+
+    with open(filename) as test_file:
+        data = json.load(test_file)
+        
+        return (data)
+
+##########################
+##Route for DataFile 1 ###
+##########################
 @app.route("/datafile1/")
 def datafile1():
     """Return the list of records in Table"""
     # Use Pandas to perform the sql query
     stmt = db.session.query(crashdata).statement
     
-    # Return a list of the column names (sample names)
     df = pd.read_sql_query(stmt, db.session.bind)
-    # print(df.keys())
-
-    # return ("Doesn't Break")
+    
     myjson = df.to_json(orient='records')
     
     return (myjson)
 
+##########################
+##Route for DataFile 2 ###
+##########################
 @app.route("/datafile2/")
 def datafile2():
     """Return the list of records in Table"""
     # Use Pandas to perform the sql query
     stmt = db.session.query(crashdata1).statement
-    
-    # Return a list of the column names (sample names)
-    df = pd.read_sql_query(stmt, db.session.bind)
-    # print(df.keys())
 
-    # return ("Doesn't Break")
+    df = pd.read_sql_query(stmt, db.session.bind)
+
     myjson = df.to_json(orient='records')
     
     return (myjson)

@@ -1,55 +1,51 @@
-var nycData = `/datafile/`;
+var nycData = `/datafile1/`;
 
-// d3.json(nycData).then((data)=>{
-//   let crashData = d3.select(`#barGraph`);
-// // Use `.html("") to clear any existing metadata
-//   sampleData.html("");
-// // Use `Object.entries` to add each key and value pair to the panel
-// // Hint: Inside the loop, you will need to use d3 to append new
-// // tags for each key-value in the metadata.
-//   Object.entries(sample).forEach(([key,value]) => {
-//     let row = sampleData.append("p");
-//     row.text(`${key}:${value}`)
-//   })
-// });
+//Load Data from Database on Server
+d3.json(nycData).then(crashData => {
+  console.log(crashData);
 
+  //list of borough names
+      // var borough = crashData.map(data => data.borough);
+      // console.log("Borough Array", borough);
+      
+      // let unique = [...new Set(filteredData.map(item => item.borough))];
+      // console.log(unique);
+      //Returns the counts of Accidents by Borough.
+      // var countOfBorough = crashData.filter(d => {
+      //     return d.borough === "Queens"
+      // }).length;
+      // console.log("Queens has", countOfBorough, "Accidents");
+  });
+  ;
+//reduce 
+//array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
 
-//Functions to Translate all JSON dates into usable dates.
-// var MyDate_String_Value = "/Date(1414972800000)/"
-// var value = new Date
-//             (
-//                  parseInt(MyDate_String_Value.replace(/(^.*\()|([+-].*$)/g, ''))
-//             );
-// var dat = value.getMonth() + 
-//                          1 + 
-//                        "/" + 
-//            value.getDate() + 
-//                        "/" + 
-//        value.getFullYear();
-// alert(dat);
+//filters list to queens
+d3.json(nycData).then((data => {
 
 
-//console log of all data within JSon Object to use.
-d3.json(nycData).then( data =>{
-  //to parse the numeric data from string
-  console.log(data[0]);
-  //latitude longitude
-  console.log(parseFloat(data[0].latitude));
-  console.log(parseFloat(data[0].longitude));
-  //to parse data from record
-  console.log((data[0].borough));
+  let unique = [...new Set(data.map(item => item.borough))];
+  console.log(unique);
+    
+  var filteredData = data.filter(d => d.borough === "Queens");
+  console.log(filteredData);
 
-  //parses date line into usable date.
-  console.log(((data[0].crash_date)));
-  console.log((data[0].crash_time));
+  //finds unique values in dataSet using map
+  let unique1 = [...new Set(filteredData.map(item => item.on_street_name))];
+  console.log(unique1);
+  // var borough1 ={}
+  // filteredData.reduce()
 
-  //street name variable
-  console.log(data[0].on_street_name);
+}));
+// filters list to bronx
 
-  //contributing factor
-  console.log(data[0].contributing_factor_vehicle_1);
+// bronxData = dataList.then((crash => {
+//   var filteredData = crash.filter(data => data.borough === "Bronx");
+//   console.log(filteredData);
+// }));
 
-  //#of persons injured and killed
-  console.log(data[0].number_of_persons_injured);
-  console.log(data[0].number_of_persons_killed);
-});
+//filters list to brooklyn
+// brooklynData = dataList.then((crash => {
+//   var filteredData = crash.filter(data => data.borough === "Brooklyn");
+//   console.log(filteredData);
+// }));

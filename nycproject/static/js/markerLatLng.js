@@ -1,8 +1,8 @@
-// NYC OPEN DATA - API ENDPOINT - RETURNS 1000
+// // NYC OPEN DATA - API ENDPOINT - RETURNS 1000
 var nycOpenData = "https://data.cityofnewyork.us/resource/h9gi-nx95.geojson";
 
 // Reading the data + Viewing the data in console
-d3.json(nycOpenData, function(data) {
+d3.json(nycOpenData).then(function(data) {
   console.log(data);
   createFeatures(data.features);
 });
@@ -62,3 +62,35 @@ function createMap(accidents) {
       collapsed: false
     }).addTo(myMap);
 }
+
+// #############################
+//Marker Cluster Example
+// #############################`
+var url = `/geojson/`;
+
+d3.json(url).then( response =>{
+  var markers = L.markerClusterGroup();
+
+  console.log(response)
+
+  for(var i=0; i< response.features.length; i++) {
+    var location = response.features[i];
+
+    console.log(location);
+
+    if (location && location.geometry && location.properties.borough){
+      markers.addLayer(L.marker([location.geometry.coordinates[1], location.geometry.coordinates[0]])
+      
+        .bindPopup("Borough: " + location.properties.borough + "<hr>" +
+        "Crash Count: "+ location.properties.crash_count+ "<hr>" +
+        "Contributing Factors: " +location.properties.contributing_factors + "<hr>"+
+        "Vehicle Type: "+ location.properties.vehicle_types));
+    }
+  }
+  myMap.addLayer(markers);
+});
+
+//Console Logs to show connection to geojson on Server.
+// d3.json(url).then( data => {
+//   console.log(data);
+// });
