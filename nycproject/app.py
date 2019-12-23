@@ -34,20 +34,15 @@ mapkey = os.environ.get('MAPKEY', '') or "CREATE MAPKEY ENV"
 #################################################
 
 from flask_sqlalchemy import SQLAlchemy
-
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db/nyc.sqlite"
-
 db = SQLAlchemy(app)
-
 from .models import crashdata, crashdata1
-
-
-# reflect an existing database into a new model
 Base = automap_base()
-# reflect the tables
 Base.prepare(db.engine, reflect=True)
 
+###############################################
 #####################ROUTES####################
+###############################################
 
 # create route that renders index.html template
 @app.route("/")
