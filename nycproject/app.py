@@ -52,7 +52,7 @@ def home():
 #Test Route for Cloropleth Mapping
 @app.route("/maps/")
 def maps():
-    return render_template("cloropleth.html")
+    return render_template("markercluster.html")
 
 ################################################
 ##Route for GeoJson Data for Cloropleth Maps ###
