@@ -54,6 +54,10 @@ def home():
 def maps():
     return render_template("markercluster.html")
 
+@app.route("/line/")
+def maps2():
+    return render_template("markercluster.html")
+
 ################################################
 ##Route for GeoJson Data for Cloropleth Maps ###
 ################################################
