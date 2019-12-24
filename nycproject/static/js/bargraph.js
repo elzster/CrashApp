@@ -40,19 +40,19 @@ d3.json(nycData).then((data => {
 //   console.log(unique);
     
   var filteredData = data.filter(d => d.borough === "Brooklyn");
-  console.log(filteredData.length + " Crashes");
+  console.log(filteredData.length + " Crashes in "+ filteredData[0].borough);
 
   var filteredData2 = data.filter(d => d.borough === "Queens");
-  console.log(filteredData2.length + " Crashes");
+  console.log(filteredData2.length + " Crashes in "+ filteredData2[0].borough);
 
   var filteredData3 = data.filter(d => d.borough === "Manhattan");
-  console.log(filteredData3.length + " Crashes");
+  console.log(filteredData3.length + " Crashes in "+ filteredData3[0].borough);
 
   var filteredData4 = data.filter(d => d.borough === "Bronx");
-  console.log(filteredData4.length + " Crashes");
+  console.log(filteredData4.length + " Crashes in "+ filteredData4[0].borough);
 
   var filteredData5 = data.filter(d => d.borough === "Staten Island");
-  console.log(filteredData5.length + " Crashes");
+  console.log(filteredData5.length + " Crashes in "+ filteredData5[0].borough);
 
   //   //finds unique values in dataSet using map
 //   let unique1 = [...new Set(filteredData.map(item => item.on_street_name))];
