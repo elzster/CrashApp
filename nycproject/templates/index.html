@@ -1,59 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>NYC Open Data - Project 2</title>
-
-  <!-- Leaflet CSS & JS -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- Leaflet JS & CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
-  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-  crossorigin=""/>
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin="" />
   <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
-  integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-  crossorigin=""></script>
-
-  <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-
-  <!--D3 cdn-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
-
-  <!-- D3 JavaScript -->
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  
-  <!-- Leaflet-Choropleth JavaScript -->
-  <script type="text/javascript" src="choroplethDocument.js"></script>
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
 
   <!-- Marker Cluster JS & CSS -->
-  <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+  <script type="text/javascript"
+    src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
-  <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
-
+  <link rel="stylesheet" type="text/css"
+    href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+  <!-- <script type="text/javascript" src="choroplethDocument.js"></script> -->
   <!-- Our CSS -->
-  <link rel="stylesheet" type="text/css" href="style.css">
-
+  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+  <title>Landing Page</title>
+  <h1>Welcome!! Test Page!</h1>
 </head>
 
-
 <body>
-  <!-- The div where we will inject our map -->
-  <div id="map"></div>
 
-  <!-- API KEY -->
-  <script type="text/javascript" src="config.js"></script>
-  
-  <!-- Our JS -->
-  <!-- <script type="text/javascript" src="logic.js"></script> -->
-  
-  <!-- Leaflet Markers -->
+  <img
+    src="data:image/jpeg;base64,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">
+  <div id="map"></div>
+  <!-- <script type="text/javascript" src="config.js"></script> -->
   <!-- <script type="text/javascript" src="markerLatLng.js"></script> -->
-  
-  <!-- Choropleth JavaScript -->
-  <script type="text/javascript" src="cloropleth.js"></script>
-  
-  <!-- Sunburst JavaScript -->
-  <!-- <script type="text/javascript" src="sunburst.js"></script> -->
-  
-  <!-- Marker Cluster JavaScript -->
-  <!-- <script type="text/javascript" src="markercluster.js"></script> -->
+
 </body>
+
 </html>
