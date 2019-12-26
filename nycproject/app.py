@@ -173,9 +173,9 @@ def variable_list(miguel):
     return jsonify(streets)
 
 ##################################################
-####################DA BOM DIGS###################
+############Summary Data Sheets###################
 ##################################################
-
+#Summary Table Call
 @app.route("/summary/<elie>/")
 def the_room(elie):
     vartar = (elie[0].upper()+elie[1:].lower())
@@ -190,37 +190,44 @@ def the_room(elie):
 
     for x in values:
         list_dict = {}
+        list_dict['cyclist'] ={}
+        list_dict['motorist']={}
+        list_dict['pedestrian']={}
+        list_dict['total']={}
         list_dict['borough'] = x.borough
 
         #####List Values that Are Summary Values##########
         #get the counts of different zip codes in passed borough
-        list_dict['zip_code_counts'] = db.session.query(crashdata).\
-        filter(crashdata.borough==vartar).\
-        group_by(crashdata.zip_code).count()
+        # list_dict['unique_zip_codes'] = db.session.query(crashdata).\
+        # filter(crashdata.borough==vartar).\
+        # group_by(crashdata.zip_code).count()
 
         #pass grouped variables into query
-        list_dict['cyclist_injured_counts'] = db.session.query(func.sum(crashdata.number_of_cyclist_injured)).\
+        list_dict['total_borough_crashes'] = db.session.query(crashdata).\
+        filter(crashdata.borough==vartar).count()
+
+        list_dict['cyclist']['injured'] = db.session.query(func.sum(crashdata.number_of_cyclist_injured)).\
         filter(crashdata.borough==vartar).all()
 
-        list_dict['cyclist_killed_counts'] = db.session.query(func.sum(crashdata.number_of_cyclist_killed)).\
+        list_dict['cyclist']['killed'] = db.session.query(func.sum(crashdata.number_of_cyclist_killed)).\
         filter(crashdata.borough==vartar).all()
 
-        list_dict['motorist_injured_counts'] = db.session.query(func.sum(crashdata.number_of_motorist_injured)).\
+        list_dict['motorist']['injured'] = db.session.query(func.sum(crashdata.number_of_motorist_injured)).\
         filter(crashdata.borough==vartar).all()
 
-        list_dict['motorist_killed_counts'] = db.session.query(func.sum(crashdata.number_of_motorist_killed)).\
+        list_dict['motorist']['killed'] = db.session.query(func.sum(crashdata.number_of_motorist_killed)).\
         filter(crashdata.borough==vartar).all()
 
-        list_dict['pedestrian_injured'] = db.session.query(func.sum(crashdata.number_of_pedestrian_injured)).\
+        list_dict['pedestrian']['injured'] = db.session.query(func.sum(crashdata.number_of_pedestrian_injured)).\
         filter(crashdata.borough==vartar).all()
 
-        list_dict['pedestrian_killed'] = db.session.query(func.sum(crashdata.number_of_pedestrian_killed)).\
+        list_dict['pedestrian']['killed'] = db.session.query(func.sum(crashdata.number_of_pedestrian_killed)).\
         filter(crashdata.borough==vartar).all()
 
-        list_dict['person_injured'] = db.session.query(func.sum(crashdata.number_of_persons_injured)).\
+        list_dict['total']['injured'] = db.session.query(func.sum(crashdata.number_of_persons_injured)).\
         filter(crashdata.borough==vartar).all()
 
-        list_dict['person_killed'] = db.session.query(func.sum(crashdata.number_of_persons_killed)).\
+        list_dict['total']['killed'] = db.session.query(func.sum(crashdata.number_of_persons_killed)).\
         filter(crashdata.borough==vartar).all()
 
         streets.append(list_dict)
