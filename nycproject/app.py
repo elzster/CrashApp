@@ -56,15 +56,15 @@ def home():
 def maps():
     return render_template("markercluster.html")
 
-# @app.route("/line/")
-# def maps2():
-#     return render_template("line.html")
+@app.route("/bargraph/")
+def bargraph():
+    return render_template("bargraph.html")
 
 # create route that gives us our map key
-@app.route("/bargraph")
-def bargraph():
+@app.route("/piegraph/")
+def piegraph():
    
-    return render_template('bargraph.html')
+    return render_template('piegraph.html')
 
 ################################################
 ##Route for GeoJson Data for Cloropleth Maps ###

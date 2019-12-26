@@ -1,85 +1,94 @@
-//Works when inputting.
-var nycQueens = `/summary/queens`;
-var nycBrooklyn = `/summary/brooklyn`;
-var nycManhatttan = `/summary/manhattan`;
-var nycStatenIsland = `/summary/statenisland`;
-var nycBronx = `/summary/bronx`;
-var nycOthers = `/summary/null`;
-d3.json(nycQueens).then(blah => {
-        console.log(blah.cyclist.injured[0]);
-    })
-    //##############Working Pie Graph##################
-    // d3.json(nycQueens).then(nyc => {
+var nycData = `/datafile1/`;
 
-//   var data = [{
-//     values: [parseInt(nyc.cyclist.injured[0]), parseInt(nyc.motorist.injured[0]), parseInt(nyc.pedestrian.injured[0])],
-//     labels: ['Cyclist', 'Motorist', 'Pedestrian'],
-//     type: 'pie'
-//   }];
+var nycData2 = `/summary/queens`
+//#############Example from Anthony with Using Reduce#############
+// test.reduce( (acc, d, index) => { 
+//   // initialize borough
+//   acc[d["borough"]] = typeof acc[d["borough"]] == "undefined" ? {} : acc[d["borough"]];
+//   // initialize or increment street count
+//   acc[d["borough"]][d["street"]] = typeof acc[d["borough"]][d["street"]] == "undefined" ? 1 : acc[d["borough"]][d["street"]] + 1;
+//   return acc;
+// }, {})
 
-//   var layout = {
-//     height: 400,
-//     width: 500
-//   };
+//#################Testing Different Filters
+// //Load Data from Database on Server
+// d3.json(nycData).then(crashData => {
+//   // console.log(crashData);
 
-//   Plotly.newPlot('plot', data, layout);
-// })
+//##############################filters   
+//list of borough names
+//       // var borough = crashData.map(data => data.borough);
+//       // console.log("Borough Array", borough);
+      
+//       // let unique = [...new Set(filteredData.map(item => item.borough))];
+//       // console.log(unique);
+//       //Returns the counts of Accidents by Borough.
+//       // var countOfBorough = crashData.filter(d => {
+//       //     return d.borough === "Queens"
+//       // }).length;
+//       // console.log("Queens has", countOfBorough, "Accidents");
+//   });
+//   ;
+//reduce 
+//array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
 
-//####################################################################333
-//Dynamic..?
-d3.json(nycQueens).then(nyc => {
-    function init() {
-            var data = [{
-                values: [parseInt(nyc.cyclist.injured[0]), parseInt(nyc.motorist.injured[0]), parseInt(nyc.pedestrian.injured[0])],
-                labels: ['Cyclist', 'Motorist', 'Pedestrian'],
-                type: 'pie'
-            }];
-
-            var layout = {
-                height: 600,
-                width: 800
-            };
-
-            Plotly.plot("plot", data, layout);
-        }
-        // can use let in this function.
-    function updatePlotly(values, labels) {
-        // Will plot into the div ID Pie
-        let PLOT = document.getElementById("plot");
-
-        // change the data for the plot
-        Plotly.restyle(PLOT, "values", [values]);
-        Plotly.restyle(PLOT, "labels", [labels]);
-
-        // Use `Plotly.restyle` to update the pie chart with the newdata array
-    }
+//filters list to queens
 
 
-    function getData(dataset) {
-        let values = [];
-        let labels = [];
-        console.log("Dropdown Selector");
+//Testing Table to HTML
+d3.json(nycData).then((data => {
 
-        switch (dataset) {
-            case "Bronx":
-                values: d3.json(nycBronx).then(d => {
-                    [parseInt(d.cyclist.injured[0]), parseInt(d.motorist.injured[0]), parseInt(d.pedestrian.injured[0])]
-                });
-                labels: ['Cyclist', 'Motorist', 'Pedestrian'];
-                break;
-            case "Manhattan":
-                values: d3.json(nycManhatttan).then(d => {
-                    [parseInt(d.cyclist.injured[0]), parseInt(d.motorist.injured[0]), parseInt(d.pedestrian.injured[0])]
-                });
-                labels: ['Cyclist', 'Motorist', 'Pedestrian'];
-                break;
-            default:
-                values: [parseInt(nyc.cyclist.injured[0]), parseInt(nyc.motorist.injured[0]), parseInt(nyc.pedestrian.injured[0])];
-                labels: ['Cyclist', 'Motorist', 'Pedestrian'];
-                break;
-        }
-        updatePlotly(values, labels);
-    }
+  let unique = [...new Set(data.map(item => item.borough))];
+  console.log(unique);
+  console.log(unique.length + " of Unique Boroughs in Dataset")  
+  var filteredData = data.filter(d => d.borough === "Brooklyn");
+  console.log(filteredData.length + " Crashes in "+ filteredData[0].borough);
 
-    init();
+  var filteredData2 = data.filter(d => d.borough === "Queens");
+  console.log(filteredData2.length + " Crashes in "+ filteredData2[0].borough);
+
+  var filteredData3 = data.filter(d => d.borough === "Manhattan");
+  console.log(filteredData3.length + " Crashes in "+ filteredData3[0].borough);
+
+  var filteredData4 = data.filter(d => d.borough === "Bronx");
+  console.log(filteredData4.length + " Crashes in "+ filteredData4[0].borough);
+
+  var filteredData5 = data.filter(d => d.borough === "Staten Island");
+  console.log(filteredData5.length + " Crashes in "+ filteredData5[0].borough);
+
+    //finds unique values in dataSet using map
+  let unique1 = [...new Set(filteredData.map(item => item.on_street_name))];
+  console.log(unique1.length + " Number of Different Streets in " + filteredData[0].borough);
+}));
+
+//#################BAR Graph################
+
+d3.json(nycData).then( data =>{
+  var filteredData = data.filter(d => d.borough === "Brooklyn" || "Staten Island" || "Queens" || "Manhattan" || "Bronx");
+  
+  console.log(filteredData);
+
+  var trace1 = {
+    //good, Maps Borough on X Axis
+    x: filteredData.map(d => d.borough),
+
+    y: filteredData.map(d => d.id), 
+    
+    text: filteredData.map(d =>d.id),
+
+    name: "Boroughs",
+    type: "bar",
+    orientation: "v"
+  };
+
+  // set up the data variable
+  var data = [trace1]
+  // set up the layout variable
+  var layout = {
+    title: "Accidents by Borough",
+  }
+
+  // Render the plot to the div tag with id "plot"
+  Plotly.newPlot('plot', data, layout);
 });
+
