@@ -76,7 +76,7 @@ d3.json(url).then( response =>{
   for(var i=0; i< response.features.length; i++) {
     var location = response.features[i];
 
-    console.log(location);
+    // console.log(location);
 
     if (location && location.geometry && location.properties.borough){
       markers.addLayer(L.marker([location.geometry.coordinates[1], location.geometry.coordinates[0]])
@@ -89,7 +89,7 @@ d3.json(url).then( response =>{
   }
   myMap.addLayer(markers);
 });
-
+// 
 //Console Logs to show connection to geojson on Server.
 // d3.json(url).then( data => {
 //   console.log(data);

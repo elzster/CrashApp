@@ -1,6 +1,6 @@
 var nycData = `/datafile1/`;
 
-var nycData2 = `/summary/queens`
+var nycData2 = `/summary/queens/`
 //#############Example from Anthony with Using Reduce#############
 // test.reduce( (acc, d, index) => { 
 //   // initialize borough
@@ -39,6 +39,7 @@ var nycData2 = `/summary/queens`
 d3.json(nycData).then((data => {
 
   let unique = [...new Set(data.map(item => item.borough))];
+  
   console.log(unique);
   console.log(unique.length + " of Unique Boroughs in Dataset")  
   var filteredData = data.filter(d => d.borough === "Brooklyn");
@@ -64,21 +65,23 @@ d3.json(nycData).then((data => {
 //#################BAR Graph################
 
 d3.json(nycData).then( data =>{
+
   var filteredData = data.filter(d => d.borough === "Brooklyn" || "Staten Island" || "Queens" || "Manhattan" || "Bronx");
   
-  console.log(filteredData);
+  var data2 = parseInt(d3.json(nycData2).then( data=> data.borough_crashes))
 
   var trace1 = {
     //good, Maps Borough on X Axis
-    x: filteredData.map(d => d.borough),
+    x: xVar = filteredData.map(d => d.borough),
 
-    y: filteredData.map(d => d.id), 
+    y: parseInt((filteredData.map(d => d.id)).length), 
     
-    text: filteredData.map(d =>d.id),
+    text: (xVar),
 
     name: "Boroughs",
     type: "bar",
     orientation: "v"
+    
   };
 
   // set up the data variable
