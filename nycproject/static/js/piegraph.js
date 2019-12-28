@@ -1,78 +1,74 @@
-function init(){
+const nycQueens = d3.json(`/summary/queens`);
+const nycBrooklyn = d3.json(`/summary/brooklyn`);
+const nycManhatttan = d3.json(`/summary/manhattan`);
+const nycStatenIsland = d3.json(`/summary/statenisland`);
+const nycBronx = d3.json(`/summary/bronx`);
 
-  //Lists of summary routes
-  var nycQueens = `/summary/queens`;
-  var nycBrooklyn = `/summary/brooklyn`;
-  var nycManhatttan = `/summary/manhattan`;
-  var nycStatenIsland = `/summary/statenisland`;
-  var nycBronx = `/summary/bronx`;
-  
-      // ##############Working Pie Graph##################
-  d3.json(nycManhatttan).then(nyc => {
-  
+var debugVar;
+
+//Testing list.
+nycQueens.then(nyc => {
+  console.log(nyc[0].borough);
+});
+
+//Works when inputting.
+function plotGraph() {
+  // ##############Working Pie Graph##################
+  nycBronx.then(nyc => {
+    var cyclistInjured = parseInt(nyc[0].cyclist.injured[0]);
+    var motoristInjured = parseInt(nyc[0].motorist.injured[0]);
+    var pedestrianInjured = parseInt(nyc[0].pedestrian.injured[0]);
+
     var data = [{
-      values: [parseInt(nyc.cyclist.injured[0]), parseInt(nyc.motorist.injured[0]), parseInt(nyc.pedestrian.injured[0])],
+      values: [cyclistInjured, motoristInjured, pedestrianInjured],
       labels: ['Cyclist', 'Motorist', 'Pedestrian'],
       type: 'pie'
     }];
-  
+
     var layout = {
       height: 600,
       width: 600,
       title: "Borough Statistics of Motorists Injured"
     };
-  
+
     Plotly.newPlot('plot', data, layout);
+
   });
-  };
-  // ####################################################################333
-  //Dynamic..?
-  function updatePlotly(values, labels) {
-    var LINE = document.getElementById("plot");
-  
-    // Note the extra brackets around 'newx' and 'newy'
-    Plotly.restyle(LINE, "x", [values]);
-    Plotly.restyle(LINE, "y", [labels]);
-  }
+}
 
+function updatePlotly(values) {
+  var PLOT = document.getElementById("plot");
 
-  function getData(dataset) {
-    var nycQueens = `/summary/queens`;
-    var nycBrooklyn = `/summary/brooklyn`;
-    var nycManhatttan = `/summary/manhattan`;
-    var nycStatenIsland = `/summary/statenisland`;
-    var nycBronx = `/summary/bronx`;
-    // Initialize empty arrays to contain our axes
-    var values = [];
-    var labels = [];
+  // Note the extra brackets around 'newx' and 'newy'
+  Plotly.restyle(PLOT, "values", [values]);
+  // Plotly.restyle(PLOT, "labels", [labels]);
+}
+
+function getData(dataset) {
+  // Initialize empty arrays to contain our axes
+  var values = [];
+  // var labels = [];
   
-    //This Will Populate different instances in drop down.
-    // Fill the x and y arrays as a function of the selected dataset
-    switch (dataset) {
+  //This Will Populate different instances in drop down.
+  // Fill the x and y arrays as a function of the selected dataset
+  switch (dataset) {
     case "Queens":
-      d3.json(nycQueens).then(nyc => {
-      values: [parseInt(nyc.cyclist.injured[0]), parseInt(nyc.motorist.injured[0]), parseInt(nyc.pedestrian.injured[0])];
-      labels: ['Cyclist', 'Motorist', 'Pedestrian'];});
-      break;
-    case "Brooklyn":
-      d3.json(nycBrooklyn).then(nyc => {
-      values: [parseInt(nyc.cyclist.injured[0]), parseInt(nyc.motorist.injured[0]), parseInt(nyc.pedestrian.injured[0])];
-      labels: ['Cyclist', 'Motorist', 'Pedestrian'];});
-      break;
-    // case "Bronx":
-    //   d3.json(nycBronx).then(nyc => {
-    //   values = [10, 20, 30, 40, 50];
-    //   labels = [10, 100, 50, 10, 0];});
-    //   break;
-    default:
-      d3.json(nycManhatttan).then(nyc => {
-        var nycvalues = [nyc.cyclist.injured[0],nyc.motorist.injured[0],nyc.pedestrian.injured[0]];
-      values: nycvalues;});
-      labels: ['Cyclist', 'Motorist', 'Pedestrian'];
-      break;
-    }
-    //updates plotly plot.
-    updatePlotly(values, labels);
-  }
+        
+      var cyclistInjured = nycQueens.then(nyc => {parseInt(nyc[0].cyclist.injured[0])});
+      var motoristInjured = nycQueens.then(nyc => {parseInt(nyc[0].motoristInjured.injured[0])});
+      var pedestrianInjured = nycQueens.then(nyc => {parseInt(nyc[0].cyclist.injured[0])});
+      
+      values = [cyclistInjured, motoristInjured, pedestrianInjured];
+    break;  
   
-  init();
+    default:
+      values = [1, 2, 3]
+    break;
+  }
+  //updates plotly plot.
+  updatePlotly(values);
+};
+
+
+
+plotGraph();

@@ -1,6 +1,14 @@
 var nycData = `/datafile1/`;
 
-var nycData2 = `/summary/queens/`
+// var nycData2 = `/summary/queens/`
+
+var nycData2 = `/summary/queens`
+
+// fetch(nycData2).then(d => {
+//   d.borough
+//   console.log(d.borough);
+// });
+
 //#############Example from Anthony with Using Reduce#############
 // test.reduce( (acc, d, index) => { 
 //   // initialize borough
@@ -36,31 +44,31 @@ var nycData2 = `/summary/queens/`
 
 
 //Testing Table to HTML
-d3.json(nycData).then((data => {
+// d3.json(nycData).then((data => {
 
-  let unique = [...new Set(data.map(item => item.borough))];
+//   let unique = [...new Set(data.map(item => item.borough))];
   
-  console.log(unique);
-  console.log(unique.length + " of Unique Boroughs in Dataset")  
-  var filteredData = data.filter(d => d.borough === "Brooklyn");
-  console.log(filteredData.length + " Crashes in "+ filteredData[0].borough);
+//   console.log(unique);
+//   console.log(unique.length + " of Unique Boroughs in Dataset")  
+//   var filteredData = data.filter(d => d.borough === "Brooklyn");
+//   console.log(filteredData.length + " Crashes in "+ filteredData[0].borough);
 
-  var filteredData2 = data.filter(d => d.borough === "Queens");
-  console.log(filteredData2.length + " Crashes in "+ filteredData2[0].borough);
+//   var filteredData2 = data.filter(d => d.borough === "Queens");
+//   console.log(filteredData2.length + " Crashes in "+ filteredData2[0].borough);
 
-  var filteredData3 = data.filter(d => d.borough === "Manhattan");
-  console.log(filteredData3.length + " Crashes in "+ filteredData3[0].borough);
+//   var filteredData3 = data.filter(d => d.borough === "Manhattan");
+//   console.log(filteredData3.length + " Crashes in "+ filteredData3[0].borough);
 
-  var filteredData4 = data.filter(d => d.borough === "Bronx");
-  console.log(filteredData4.length + " Crashes in "+ filteredData4[0].borough);
+//   var filteredData4 = data.filter(d => d.borough === "Bronx");
+//   console.log(filteredData4.length + " Crashes in "+ filteredData4[0].borough);
 
-  var filteredData5 = data.filter(d => d.borough === "Staten Island");
-  console.log(filteredData5.length + " Crashes in "+ filteredData5[0].borough);
+//   var filteredData5 = data.filter(d => d.borough === "Staten Island");
+//   console.log(filteredData5.length + " Crashes in "+ filteredData5[0].borough);
 
-    //finds unique values in dataSet using map
-  let unique1 = [...new Set(filteredData.map(item => item.on_street_name))];
-  console.log(unique1.length + " Number of Different Streets in " + filteredData[0].borough);
-}));
+//     //finds unique values in dataSet using map
+//   let unique1 = [...new Set(filteredData.map(item => item.on_street_name))];
+//   console.log(unique1.length + " Number of Different Streets in " + filteredData[0].borough);
+// }));
 
 //#################BAR Graph################
 

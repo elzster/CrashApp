@@ -37,7 +37,7 @@ mapkey = os.environ.get('MAPKEY', '') or "CREATE MAPKEY ENV"
 from flask_sqlalchemy import SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db/nyc.sqlite"
 db = SQLAlchemy(app)
-from .models import crashdata, crashdata1
+from .models import crashdata
 Base = automap_base()
 Base.prepare(db.engine, reflect=True)
 
@@ -92,7 +92,11 @@ def datafile1():
     
     myjson = df.to_json(orient='records')
     
-    return (myjson)
+    citylist = []
+    for city in db.session.query(crashdata.borough).distinct():
+        citylist.append(city)
+
+    return jsonify(myjson)
 
 ##########################
 ##Dynamic Route for Borough ###
@@ -103,7 +107,10 @@ def city_borough(city):
     resultsData = db.session.query(crashdata).\
                 filter(crashdata.borough == (city[0].upper()+city[1:].lower())).all()
 
-    listData = []
+    # listData = []
+    # citylist = []
+    # for city in db.session.query(crashdata.borough).distinct():
+    #     citylist.append(city)
 
     for x in resultsData:
         list_dict = {}
@@ -183,6 +190,12 @@ def variable_list(miguel):
 def the_room(elie):
     vartar = (elie[0].upper()+elie[1:].lower())
     """Return the list of records in Table"""
+    
+    #hmm... List of unique boroughs.
+    # citylist = []
+    # for city in db.session.query(crashdata.borough).distinct():
+    #     citylist.append(city)
+
 
 #Group By SQLAlchemy
     values = db.session.query(crashdata).\
@@ -228,8 +241,10 @@ def the_room(elie):
     filter(crashdata.borough==vartar).all()
 
     streets.append(list_dict)
-
+    #returns list of cities that can be used for plotly variables?
     return jsonify(streets)
+    
+
 
 if __name__ == "__main__":
     app.run()
