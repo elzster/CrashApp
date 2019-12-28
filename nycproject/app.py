@@ -41,8 +41,15 @@ from .models import crashdata
 Base = automap_base()
 Base.prepare(db.engine, reflect=True)
 
+
+
+
+
+
+
+
 ###############################################
-#####################ROUTES####################
+#########Html Routes for Web Server ###########
 ###############################################
 
 # create route that renders index.html template
@@ -66,9 +73,13 @@ def piegraph():
     
     return render_template('piegraph.html')
 
+
+
+
 ################################################
 ##Route for GeoJson Data for Cloropleth Maps ###
 ################################################
+#this route renders and reads geojson file
 @app.route("/geojson/")
 def showjson():
 
@@ -78,6 +89,10 @@ def showjson():
         data = json.load(test_file)
         
         return (data)
+################################################
+####Route for Cloropleth Data File Needed  #####
+################################################
+#this route renders and reads geojson file
 @app.route("/bounds/")
 def bounds():
 
@@ -87,9 +102,9 @@ def bounds():
         data = json.load(test_file)
         
         return (data)
-##########################
-##Route for DataFile 1 ###
-##########################
+##############################################
+############Master Datafile Set ##############
+##############################################
 @app.route("/datafile1/")
 def datafile1():
     """Return the list of records in Table"""
@@ -115,7 +130,7 @@ def city_borough(city):
     resultsData = db.session.query(crashdata).\
                 filter(crashdata.borough == (city[0].upper()+city[1:].lower())).all()
 
-    # listData = []
+    listData = []
     # citylist = []
     # for city in db.session.query(crashdata.borough).distinct():
     #     citylist.append(city)
@@ -135,7 +150,9 @@ def city_borough(city):
 #########################################
 ###########NO NULL BOROUGHS##############
 #########################################
-@app.route("/boroughstreets/")
+
+#This route just gets the Boroughs and Lat and Long Coordinates
+@app.route("/borough/")
 def no_null():
     """Return the list of records in Table"""
 
@@ -158,10 +175,10 @@ def no_null():
 
     return jsonify(streetsNyc)
     
-######################################################    
+#####################################################
 ##############Different Values Testing###############
 #####################################################
-@app.route("/variablelist/<miguel>/")
+@app.route("/events/<miguel>/")
 def variable_list(miguel):
     vartar = (miguel[0].upper()+miguel[1:].lower())
     """Return the list of records in Table"""
@@ -246,18 +263,12 @@ def the_room(elie):
     streets.append(list_dict)
     #returns list of cities that can be used for plotly variables?
     return jsonify(streets)
-    
+
+##################################################################    
+###Route to Pull Summary up On Staten Island due to string issues.    
 @app.route("/summary/statenisland/")
 def staten():
-    # vartar = (elie[0].upper()+elie[1:].lower())
-    # """Return the list of records in Table"""
     vartar = "Staten Island"
-    #hmm... List of unique boroughs.
-    # citylist = []
-    # for city in db.session.query(crashdata.borough).distinct():
-    #     citylist.append(city)
-
-
 #Group By SQLAlchemy
     values = db.session.query(crashdata).\
         filter(crashdata.borough==vartar).\
