@@ -54,7 +54,7 @@ def home():
 #Test Route for Cloropleth Mapping
 @app.route("/maps/")
 def maps():
-    return render_template("markercluster.html")
+    return render_template("heatmap.html")
 
 @app.route("/bargraph/")
 def bargraph():
@@ -78,7 +78,15 @@ def showjson():
         data = json.load(test_file)
         
         return (data)
+@app.route("/bounds/")
+def bounds():
 
+    filename = os.path.join(app.static_folder, 'js', 'nyc.geojson')
+
+    with open(filename) as test_file:
+        data = json.load(test_file)
+        
+        return (data)
 ##########################
 ##Route for DataFile 1 ###
 ##########################

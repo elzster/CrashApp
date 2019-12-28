@@ -57,9 +57,9 @@ var baseMaps = {
 // Creating -  URLs
 // #############################################################
 
-var url = "/nycproject/static/js/cartodb.geojson";
+var url = `/geojson/`;
 
-var link = "/nycproject/data/nyc.geojson";
+var link = `/bounds/`;
 
 // #############################################################
 // Creating -  Borough Boundaries - 1st Layer
@@ -191,7 +191,7 @@ var myMap = L.map("map", {
 // #############################################################
 
 var overlayMaps = {
-    // "HeatMap": cityHeatMap,
+    "HeatMap": cityHeatMap,
     // "Boundaries": cityBoundary
     // "Leaflet": layersLeaflet
     "Boundaries": cityBoundary
@@ -207,38 +207,38 @@ L.control.layers(baseMaps, overlayMaps).addTo(myMap);
 // Creating - Markers for Boroughs
 // #############################################################
 
-// var markerBronx = L.marker([40.8448, -73.8648], {
-//     draggable: false,
-//     title: "Bronx"
-// }).addTo(myMap);
+var markerBronx = L.marker([40.8448, -73.8648], {
+    draggable: false,
+    title: "Bronx"
+}).addTo(myMap);
 
-// markerBronx.bindPopup("Bronx");
+markerBronx.bindPopup("Bronx");
 
-// var markerBrooklyn = L.marker([40.6782, -73.9442], {
-//     draggable: false,
-//     title: "Brooklyn"
-// }).addTo(myMap);
+var markerBrooklyn = L.marker([40.6782, -73.9442], {
+    draggable: false,
+    title: "Brooklyn"
+}).addTo(myMap);
 
-// markerBrooklyn.bindPopup("Brooklyn");
+markerBrooklyn.bindPopup("Brooklyn");
 
-// var markerQueens = L.marker([40.7282, -73.7949], {
-//     draggable: false,
-//     title: "Queens"
-// }).addTo(myMap);
+var markerQueens = L.marker([40.7282, -73.7949], {
+    draggable: false,
+    title: "Queens"
+}).addTo(myMap);
 
-// markerQueens.bindPopup("Queens");
+markerQueens.bindPopup("Queens");
 
-// var markerManhattan = L.marker([40.7831, -73.9712], {
-//     draggable: false,
-//     title: "Manhattan"
-// }).addTo(myMap);
+var markerManhattan = L.marker([40.7831, -73.9712], {
+    draggable: false,
+    title: "Manhattan"
+}).addTo(myMap);
 
-// markerManhattan.bindPopup("Manhattan");
+markerManhattan.bindPopup("Manhattan");
 
-// var markerStatenIsland = L.marker([40.5795, -74.1502], {
-//     draggable: false,
-//     title: "Staten Island"
-// }).addTo(myMap);
+var markerStatenIsland = L.marker([40.5795, -74.1502], {
+    draggable: false,
+    title: "Staten Island"
+}).addTo(myMap);
 
-// markerStatenIsland.bindPopup("Staten Island");
+markerStatenIsland.bindPopup("Staten Island");
 
