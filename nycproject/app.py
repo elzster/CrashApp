@@ -247,6 +247,63 @@ def the_room(elie):
     #returns list of cities that can be used for plotly variables?
     return jsonify(streets)
     
+@app.route("/summary/statenisland/")
+def staten():
+    # vartar = (elie[0].upper()+elie[1:].lower())
+    # """Return the list of records in Table"""
+    vartar = "Staten Island"
+    #hmm... List of unique boroughs.
+    # citylist = []
+    # for city in db.session.query(crashdata.borough).distinct():
+    #     citylist.append(city)
+
+
+#Group By SQLAlchemy
+    values = db.session.query(crashdata).\
+        filter(crashdata.borough==vartar).\
+        group_by(crashdata.zip_code).all()
+
+    streets = []
+
+    # for x in values:
+    list_dict = {}
+    list_dict['cyclist'] ={}
+    list_dict['motorist']={}
+    list_dict['pedestrian']={}
+    list_dict['total']={}
+    list_dict['borough'] = vartar
+
+    #Queries to Add totals to List Object
+    list_dict['borough_crashes'] = db.session.query(crashdata).\
+    filter(crashdata.borough==vartar).count()
+
+    list_dict['cyclist']['injured'] = db.session.query(func.sum(crashdata.number_of_cyclist_injured)).\
+    filter(crashdata.borough==vartar).all()
+
+    list_dict['cyclist']['killed'] = db.session.query(func.sum(crashdata.number_of_cyclist_killed)).\
+    filter(crashdata.borough==vartar).all()
+
+    list_dict['motorist']['injured'] = db.session.query(func.sum(crashdata.number_of_motorist_injured)).\
+    filter(crashdata.borough==vartar).all()
+
+    list_dict['motorist']['killed'] = db.session.query(func.sum(crashdata.number_of_motorist_killed)).\
+    filter(crashdata.borough==vartar).all()
+
+    list_dict['pedestrian']['injured'] = db.session.query(func.sum(crashdata.number_of_pedestrian_injured)).\
+    filter(crashdata.borough==vartar).all()
+
+    list_dict['pedestrian']['killed'] = db.session.query(func.sum(crashdata.number_of_pedestrian_killed)).\
+    filter(crashdata.borough==vartar).all()
+
+    list_dict['total']['injured'] = db.session.query(func.sum(crashdata.number_of_persons_injured)).\
+    filter(crashdata.borough==vartar).all()
+
+    list_dict['total']['killed'] = db.session.query(func.sum(crashdata.number_of_persons_killed)).\
+    filter(crashdata.borough==vartar).all()
+
+    streets.append(list_dict)
+    #returns list of cities that can be used for plotly variables?
+    return jsonify(streets)
 
 
 if __name__ == "__main__":

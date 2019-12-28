@@ -1,9 +1,8 @@
 const nycQueens = d3.json(`/summary/queens`);
 const nycBrooklyn = d3.json(`/summary/brooklyn`);
 const nycManhatttan = d3.json(`/summary/manhattan`);
-const nycStatenIsland = d3.json(`/summary/statenisland`);
 const nycBronx = d3.json(`/summary/bronx`);
-
+const nycStaten = d3.json(`/summary/statenisland`);
 var debugVar;
 
 //Testing list.
@@ -14,7 +13,7 @@ nycQueens.then(nyc => {
 //Works when inputting.
 function plotGraph() {
   // ##############Working Pie Graph##################
-  nycBronx.then(nyc => {
+  nycManhatttan.then(nyc => {
     var cyclistInjured = parseInt(nyc[0].cyclist.injured[0]);
     var motoristInjured = parseInt(nyc[0].motorist.injured[0]);
     var pedestrianInjured = parseInt(nyc[0].pedestrian.injured[0]);
@@ -53,28 +52,23 @@ function getData(dataset) {
   // Fill the x and y arrays as a function of the selected dataset
   switch (dataset) {
     case "Queens":
-        // ##############Working Pie Graph##################
-        nycQueens.then(nyc => {
-          let values[0] = parseInt(nyc[0].cyclist.injured[0]);
-          // let values[1] = parseInt(nyc[0].motorist.injured[0]);
-          // let values[2] = parseInt(nyc[0].pedestrian.injured[0]);
-      
-          return values
-        })
-        .catch(error => {
-          console.log("Error")
-        });
-      }
-    break;  
-  
-    default:
-      values = [1, 2, 3]
+        values = [49, 1026, 255]
     break;
-  
+    case "Bronx":
+        values = [19, 555, 148]
+    break;  
+  case "Brooklyn":
+        values = [82, 1021, 317]
+    break;
+  case "Staten Island":
+      values = [3, 207, 39]
+    break;
+  default:
+      values = [89, 320, 152]
+    break;
+  }
   //updates plotly plot.
   updatePlotly(values);
 };
-
-
 
 plotGraph();
