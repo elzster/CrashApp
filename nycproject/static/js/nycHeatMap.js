@@ -75,7 +75,7 @@ var mapStyle = {
 function chooseColor(borough) {
     switch(borough) {
         case "Brooklyn":
-            return "yellow";
+            return "White";
         case "Bronx":
             return "red";
         case "Manhattan":
@@ -128,7 +128,7 @@ var layerBoroughBoundaries = d3.json(link).then(function(data) {
         // }
 
     })
-    .addTo(myMap);
+    // .addTo(myMap);
 });
 
 var cityBoundary = new L.layerGroup(layerBoroughBoundaries);

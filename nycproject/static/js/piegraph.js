@@ -53,18 +53,24 @@ function getData(dataset) {
   // Fill the x and y arrays as a function of the selected dataset
   switch (dataset) {
     case "Queens":
-        
-      var cyclistInjured = nycQueens.then(nyc => {parseInt(nyc[0].cyclist.injured[0])});
-      var motoristInjured = nycQueens.then(nyc => {parseInt(nyc[0].motoristInjured.injured[0])});
-      var pedestrianInjured = nycQueens.then(nyc => {parseInt(nyc[0].cyclist.injured[0])});
+        // ##############Working Pie Graph##################
+        nycQueens.then(nyc => {
+          let values[0] = parseInt(nyc[0].cyclist.injured[0]);
+          // let values[1] = parseInt(nyc[0].motorist.injured[0]);
+          // let values[2] = parseInt(nyc[0].pedestrian.injured[0]);
       
-      values = [cyclistInjured, motoristInjured, pedestrianInjured];
+          return values
+        })
+        .catch(error => {
+          console.log("Error")
+        });
+      }
     break;  
   
     default:
       values = [1, 2, 3]
     break;
-  }
+  
   //updates plotly plot.
   updatePlotly(values);
 };

@@ -172,23 +172,18 @@ def variable_list(miguel):
 
     streets = []
 
-    for x in queryresults:
-        list_dict = {}
-        list_dict['borough'] = x.borough
-        list_dict['on_street_name'] = x.on_street_name
-        list_dict['latitude'] = x.latitude
-        list_dict['longitude'] = x.longitude
-        list_dict['zip_code'] = x.zip_code
+    list_dict = {}
+    list_dict['borough'] = vartar
+    
+    list_dict['crash_events_injuries'] = db.session.query(func.count(crashdata.number_of_persons_injured)).\
+    filter(crashdata.borough==vartar).all()
 
-        list_dict['crash_events_injuries'] = db.session.query(func.count(crashdata.number_of_persons_injured)).\
-        filter(crashdata.borough==vartar).all()
+    list_dict['total_injuries'] = db.session.query(func.sum(crashdata.number_of_persons_injured)).\
+    filter(crashdata.borough==vartar).all()
 
-        list_dict['total_injuries'] = db.session.query(func.sum(crashdata.number_of_persons_injured)).\
-        filter(crashdata.borough==vartar).all()
+    streets.append(list_dict)
 
-        streets.append(list_dict)
-
-    return jsonify(streets)
+    return jsonify(streets[0])
 
 ##################################################
 ############Summary Data Sheets###################
