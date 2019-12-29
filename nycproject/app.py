@@ -73,10 +73,10 @@ def piegraph():
     
     return render_template('piegraph.html')
 
-@app.route("/piegraph2/")
-def piegraph2():
+@app.route("/donut/")
+def donut():
     
-    return render_template('piegraph2.html')
+    return render_template('donut.html')
 
 
 

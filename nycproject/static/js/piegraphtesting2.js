@@ -67,7 +67,7 @@ function init(city){
     //   break;
     default:
       d3.json(nycManhatttan).then(nyc => {
-        var nycvalues = [nyc.cyclist.injured[0],nyc.motorist.injured[0],nyc.pedestrian.injured[0]];
+        var nycvalues = [nyc.cyclist.killed[0],nyc.motorist.killed[0],nyc.pedestrian.killed[0]];
       values: nycvalues;});
       labels: ['Cyclist', 'Motorist', 'Pedestrian'];
       break;

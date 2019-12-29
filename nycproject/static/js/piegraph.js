@@ -5,38 +5,38 @@ const nycBronx = d3.json(`/summary/bronx`);
 const nycStaten = d3.json(`/summary/statenisland`);
 var debugVar;
 
-//Testing list.
-nycQueens.then(nyc => {
-  console.log(nyc[0].borough);
-});
+// //Testing list.
+// nycQueens.then(nyc => {
+//   console.log(nyc[0].borough);
+// });
 
 //Works when inputting.
-function plotGraph() {
+function plotInjured() {
   // ##############Working Pie Graph##################
   nycManhatttan.then(nyc => {
-    var cyclistInjured = parseInt(nyc[0].cyclist.injured[0]);
-    var motoristInjured = parseInt(nyc[0].motorist.injured[0]);
-    var pedestrianInjured = parseInt(nyc[0].pedestrian.injured[0]);
+    let cyclistInjured = parseInt(nyc[0].cyclist.injured[0]);
+    let motoristInjured = parseInt(nyc[0].motorist.injured[0]);
+    let pedestrianInjured = parseInt(nyc[0].pedestrian.injured[0]);
 
-    var data = [{
+    let data = [{
       values: [cyclistInjured, motoristInjured, pedestrianInjured],
       labels: ['Cyclist', 'Motorist', 'Pedestrian'],
       type: 'pie'
     }];
 
-    var layout = {
-      height: 600,
-      width: 600,
-      title: "Borough Statistics of Motorists Injured"
+    let layout = {
+      height: 400,
+      width: 400,
+      title: "Borough Stats of Persons Injured"
     };
 
-    Plotly.newPlot('plot', data, layout);
+    Plotly.newPlot('plotinjured', data, layout);
 
   });
 }
 
-function updatePlotly(values) {
-  var PLOT = document.getElementById("plot");
+function updateInjured(values) {
+  let PLOT = document.getElementById("plotinjured");
 
   // Note the extra brackets around 'newx' and 'newy'
   Plotly.restyle(PLOT, "values", [values]);
@@ -45,7 +45,7 @@ function updatePlotly(values) {
 
 function getData(dataset) {
   // Initialize empty arrays to contain our axes
-  var values = [];
+  let values = [];
   // var labels = [];
   
   //This Will Populate different instances in drop down.
@@ -56,7 +56,7 @@ function getData(dataset) {
     break;
     case "Bronx":
         values = [19, 555, 148]
-    break;  
+    break;   
   case "Brooklyn":
         values = [82, 1021, 317]
     break;
@@ -68,7 +68,7 @@ function getData(dataset) {
     break;
   }
   //updates plotly plot.
-  updatePlotly(values);
+  updateInjured(values);
 };
 
-plotGraph();
+plotInjured();

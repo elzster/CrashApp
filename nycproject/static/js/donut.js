@@ -64,7 +64,7 @@ function plotGraph() {
       showlegend: true,
       grid: { rows: 2, columns: 2 }
     };
-
+    // console.log([values]);
     Plotly.newPlot('plot', data, layout);
 
   });
@@ -75,6 +75,7 @@ function updatePlotly(values) {
   // Note the extra brackets around 'newx' and 'newy'
   Plotly.restyle(PLOT, "values", [values]);
   // Plotly.restyle(PLOT, "labels", [labels]);
+  // console.log(values);
 }
 
 function getData(dataset) {
@@ -88,17 +89,17 @@ function getData(dataset) {
     case "Queens":
         values = [49, 1026, 255]
     break;
-    case "Bronx":
-        values = [19, 555, 148]
-    break;  
-  case "Brooklyn":
-        values = [82, 1021, 317]
-    break;
-  case "Staten Island":
-      values = [3, 207, 39]
-    break;
+  //   case "Bronx":
+  //       values = [19, 555, 148]
+  //   break;  
+  // case "Brooklyn":
+  //       values = [82, 1021, 317]
+  //   break;
+  // case "Staten Island":
+  //     values = [3, 207, 39]
+  //   break;
   default:
-      values = [89, 320, 152]
+      values = [89, 320, 152],[1,1,1]
     break;
   }
   //updates plotly plot.
