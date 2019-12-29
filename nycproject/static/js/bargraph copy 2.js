@@ -1,80 +1,74 @@
-//Works when inputting.
-var nycQueens = `/summary/queens`;
-var nycBrooklyn = `/summary/brooklyn`;
-var nycManhatttan = `/summary/manhattan`;
-var nycStatenIsland = `/summary/statenisland`;
-var nycBronx = `/summary/bronx`;
-var nycOthers = `/summary/null`;
-d3.json(nycQueens).then(blah => {
-  console.log(blah.cyclist.injured[0]);
-})
+// var nycData = d3.json(`/datafile1/`);
 
-d3.json(nycQueens).then(nyc => {
+// var nycData2 = `/summary/queens/`
 
-  var data = [{
-    values: [parseInt(nyc.cyclist.injured[0]), parseInt(nyc.motorist.injured[0]), parseInt(nyc.pedestrian.injured[0])],
-    labels: ['Cyclist', 'Motorist', 'Pedestrian'],
-    type: 'pie'
-  }];
+var nycData2 = d3.json(`/summary/queens/`)
+
+const topten = d3.json(`/topten/`)
+
+
+
+//#################BAR Graph################
+
+topten.then( data =>{
+  //more of just the vanilla json call.
+  console.log(data)
+  //more direct path?
+  console.log(data[0].top_ten[0][0])
+  // data.forEach( d=> {
+  //   console.log(d.top_ten)
+  // });
+// });
   
-  var layout = {
-    height: 400,
-    width: 500
-  };
-  
-  Plotly.newPlot('plot', data, layout);
-})
+  // var debugVar = data;
+  var listCount = []
+  var listRoads = []
 
-//####################################################################333
-//Dynamic..?
-
-function init() {
-  var data = [{
-    values: [parseInt(nyc.cyclist.injured[0]), parseInt(nyc.motorist.injured[0]), parseInt(nyc.pedestrian.injured[0])],
-    labels: ['Cyclist', 'Motorist', 'Pedestrian'],
-    type: 'pie'
-  }];
-​
-  var layout = {
-    height: 600,
-    width: 800
-  };
-​
-  Plotly.plot("plot", data, layout);
-}
-// can use let in this function.
-function updatePlotly(values, labels) {
-  // Will plot into the div ID Pie
-  let PLOT = document.getElementById("pie");
-​
-  // change the data for the plot
-  Plotly.restyle(PLOT, "values", [values]);
-  Plotly.restyle(PLOT, "labels", [labels]);
-​
-  // Use `Plotly.restyle` to update the pie chart with the newdata array
-}
-​
-function getData(dataset) {
-  let values = [];
-  let labels = [];
-  console.log("Dropdown Selector");
-​
-  switch (dataset) {
-    case "music":
-      values = [19, 26, 55, 88];
-      labels = ["Spotify", "Soundcloud", "Pandora", "Itunes"];
-      break;
-    case "pie":
-      values = [6, 3, 8, 7];
-      labels = ["Apple", "Cherry", "Pecan", "Peach"];
-      break;
-    case "tv":
-      values = [6, 11, 2, 12];
-      labels = ["Friends", "Office", "Survivor", "My Little Pony"];
-      break;
-    default:
-      values = [19, 26, 55, 88];
-      labels = ["Spotify", "Soundcloud", "Pandora", "Itunes"];
-      break;
+  for (var i = 0; i< data[0].top_ten.length; i++){
+    console.log(data[0].top_ten.length);
+    listCount.push(data[0].top_ten[i][0]);
   }
+  // return listCount;
+  console.log(listCount);
 
+  for (var i = 0; i< data[0].top_ten.length; i++){
+    console.log(data[0].top_ten.length);
+    listRoads.push(data[0].top_ten[i][1]);
+  }
+  console.log(listRoads);
+  // for (var i = 0; i < d; i++) {
+  //  something.push()
+  // }
+  // return somethingElse
+
+
+  // let cyclistInjured = parseInt(data[0].cyclist.injured);
+  // let motoristInjured = parseInt(data[0].motorist.injured);
+  // let pedestrianInjured = parseInt(data[0].pedestrian.injured);
+  // let cyclistKilled = parseInt(data[0].cyclist.killed);
+  // let motoristKilled = parseInt(data[0].motorist.killed);
+  // let pedestrianKilled = parseInt(data[0].pedestrian.killed);
+
+  let injured = {
+    x: listRoads,
+    y: listCount,
+    name: 'Top 10 RoadWays',
+    type: 'bar',
+    orientation: 'v'
+  };
+
+
+  // let killed = {
+  //   x: ['Cyclist', 'Motorist', 'Pedestrian'],
+  //   y: [cyclistKilled, motoristKilled, pedestrianKilled],
+  //   name: 'Killed Stats',
+  //   type: 'bar'
+  // };
+
+  var data = [injured];
+
+  // var layout = {barmode: 'group'};
+
+Plotly.newPlot('plot', data);
+
+});

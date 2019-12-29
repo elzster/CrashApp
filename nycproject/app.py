@@ -115,16 +115,10 @@ def datafile1():
     """Return the list of records in Table"""
     # Use Pandas to perform the sql query
     stmt = db.session.query(crashdata).statement
-    
     df = pd.read_sql_query(stmt, db.session.bind)
-    
-    myjson = df.to_json(orient='records')
-    
-    citylist = []
-    for city in db.session.query(crashdata.borough).distinct():
-        citylist.append(city)
 
-    return jsonify(myjson)
+    json = df.to_json(orient='records')
+    return (json)
 
 ##########################
 ##Dynamic Route for Borough ###
@@ -196,13 +190,16 @@ def variable_list(miguel):
 
     list_dict = {}
     list_dict['borough'] = vartar
-    
-    list_dict['crash_events_injuries'] = db.session.query(func.count(crashdata.number_of_persons_injured)).\
+    list_dict['crash_events_killed'] = db.session.query(func.sum(crashdata.number_of_persons_killed)).\
+    filter(crashdata.borough==vartar).all()
+    list_dict['crash_events_injuries'] = db.session.query(func.sum(crashdata.number_of_persons_injured)).\
     filter(crashdata.borough==vartar).all()
 
-    list_dict['total_injuries'] = db.session.query(func.sum(crashdata.number_of_persons_injured)).\
+    list_dict['total_injuries'] = db.session.query(func.count(crashdata.number_of_persons_injured)).\
     filter(crashdata.borough==vartar).all()
 
+    list_dict['total_crashes'] = db.session.query(func.count(crashdata.id)).\
+    filter(crashdata.borough==vartar).all()
     streets.append(list_dict)
 
     return jsonify(streets[0])
@@ -214,6 +211,7 @@ def variable_list(miguel):
 @app.route("/summary/<elie>/")
 def the_room(elie):
     vartar = (elie[0].upper()+elie[1:].lower())
+    
     """Return the list of records in Table"""
     
     #hmm... List of unique boroughs.
@@ -321,6 +319,47 @@ def staten():
     #returns list of cities that can be used for plotly variables?
     return jsonify(streets)
 
+##################################################################    
+###Route to Pull Top Ten RoadWays in Dataset###################### 
+################################################################## 
+
+@app.route("/topten/")
+def roadways():
+    # values = db.session.query(crashdata).\
+    # group_by(crashdata.zip_code).all()
+    roads = []
+
+    list_dict = {}
+    list_dict['top_ten'] = {}
+
+    list_dict['top_ten'] = db.session.query(func.count(crashdata.on_street_name), crashdata.on_street_name, crashdata.latitude, crashdata.longitude, crashdata.borough).\
+    group_by(crashdata.on_street_name).\
+    order_by(func.count(crashdata.on_street_name).desc()).limit(10).all()
+    
+    roads.append(list_dict)
+
+    return jsonify(roads) 
+
+##################################################################  
+############ 
+##################################################################    
+@app.route("/factors/")
+def factoid():
+    # values = db.session.query(crashdata).\
+    # group_by(crashdata.zip_code).all()
+    factors = []
+
+    list_dict={}
+
+    list_dict['factors'] = {}
+
+    list_dict['factors'] = db.session.query(func.count(crashdata.contributing_factors), crashdata.contributing_factors, func.sum(crashdata.number_of_persons_injured), func.sum(crashdata.number_of_persons_killed),crashdata.borough).\
+    group_by(crashdata.contributing_factors).\
+    order_by(func.count(crashdata.contributing_factors).desc()).limit(10).all()
+    
+    factors.append(list_dict)
+
+    return jsonify(factors) 
 
 if __name__ == "__main__":
     app.run()
