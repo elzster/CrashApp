@@ -73,6 +73,11 @@ def piegraph():
     
     return render_template('piegraph.html')
 
+@app.route("/piegraph2/")
+def piegraph2():
+    
+    return render_template('piegraph2.html')
+
 
 
 
