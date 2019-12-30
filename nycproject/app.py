@@ -58,6 +58,11 @@ def home():
 
     return render_template("index.html")
 
+@app.route("/jon/")
+def jon():
+
+    return render_template("jon.html")
+
 #Test Route for Cloropleth Mapping
 @app.route("/maps/")
 def maps():
@@ -341,7 +346,7 @@ def roadways():
     return jsonify(roads) 
 
 ##################################################################  
-############ 
+############ Top 10 Contributing Factors #########################
 ##################################################################    
 @app.route("/factors/")
 def factoid():
