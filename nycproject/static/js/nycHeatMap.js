@@ -181,8 +181,8 @@ var myMap = L.map("map", {
     zoom: 12,
     layers: [
         tileLayerDark,
-        cityBoundary
-        // layersLeaflet
+        cityBoundary,
+        cityHeatMap
     ]
 });
 

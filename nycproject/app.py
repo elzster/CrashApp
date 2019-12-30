@@ -52,7 +52,6 @@ Base.prepare(db.engine, reflect=True)
 #########Html Routes for Web Server ###########
 ###############################################
 
-# create route that renders index.html template
 @app.route("/")
 def home():
 
@@ -63,7 +62,6 @@ def jon():
 
     return render_template("jon.html")
 
-#Test Route for Cloropleth Mapping
 @app.route("/maps/")
 def maps():
     return render_template("heatmap.html")
@@ -72,7 +70,6 @@ def maps():
 def bargraph():
     return render_template("bargraph.html")
 
-# create route that gives us our map key
 @app.route("/piegraph/")
 def piegraph():
     

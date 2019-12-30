@@ -51,6 +51,6 @@ factors.then( data =>{
 
   // var layout = {barmode: 'group'};
 
-Plotly.newPlot('plot', data)
+Plotly.newPlot('plotfactor', data)
 
 });
