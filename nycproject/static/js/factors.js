@@ -41,7 +41,7 @@ factors.then( data =>{
     x: listFactor,
     y: listCount,
 
-    name: 'Top 10 Contributing Factors',
+    name: listFactor,
     type: 'bar',
     orientation: 'v'
   };
@@ -49,8 +49,15 @@ factors.then( data =>{
 
   var data = [contributing];
 
-  // var layout = {barmode: 'group'};
+  var layout = {
+    height: 400,
+    width: 400,
+    title: 'Top Contributing Factors',
+    xaxis:{
+      tickangle:-45
+    }
+  };
 
-Plotly.newPlot('plotfactor', data)
+Plotly.newPlot('plotfactor', data, layout);
 
 });

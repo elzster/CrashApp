@@ -27,7 +27,7 @@ function plotInjured() {
     let layout = {
       height: 400,
       width: 400,
-      title: "Borough Stats of Persons Injured"
+      title: "Number of Injured By Borough"
     };
 
     Plotly.newPlot('plotinjured', data, layout);
