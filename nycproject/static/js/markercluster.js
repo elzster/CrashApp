@@ -1,4 +1,4 @@
-var myMap = L.map("map", {
+var myMap = L.map("clustermap", {
     center: [40.7, -73.95],
     zoom: 10
 });
