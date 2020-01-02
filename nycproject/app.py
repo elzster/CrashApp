@@ -51,29 +51,37 @@ Base.prepare(db.engine, reflect=True)
 ###############################################
 #########Html Routes for Web Server ###########
 ###############################################
-
+####Landing Page####
 @app.route("/")
 def home():
 
     return render_template("index.html")
 
+
+###DashBoard MainPage####
 @app.route("/dash/")
 def dash():
 
-    return render_template("testpage.html")
+    return render_template("dash.html")
 
-@app.route("/jon/")
-def jon():
+@app.route("/boroughcomp/")
+def boroughcomp():
 
-    return render_template("jon.html")
+    return render_template("boroughcomp.html")
+
+
+@app.route("/scope/")
+def scope():
+
+    return render_template("scope.html")
 
 @app.route("/maps/")
 def maps():
     return render_template("heatmap.html")
 
-@app.route("/bargraph/")
+@app.route("/top10/")
 def bargraph():
-    return render_template("bargraph.html")
+    return render_template("topten.html")
 
 @app.route("/piegraph/")
 def piegraph():
