@@ -1,7 +1,10 @@
 body {
   font-family: "Lato", sans-serif;
 }
-
+/* body {
+  padding: 0;
+  margin: 0;
+} */
 .sidenav {
   height: 100%;
   width: 160px;
@@ -36,6 +39,53 @@ body {
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+html, body, #map {
+  position: relative;
+  border: 1px solid black;
+  border-radius: 15px;
+  height: 100%;  /* or as desired */
+  width: 100%;
+}
+
+/*Legend specific -- MP */
+.legend {
+  padding: 6px 8px;
+  font: 25px menlo, Helvetica, sans-serif;
+  background: white;
+  background: rgba(2, 2, 2, 0.8);
+  /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+  /*border-radius: 5px;*/
+  line-height: 24px;
+  color: rgb(255, 255, 255);
+}
+
+/*Legend specific -- MP */
+/* Title */
+.legend h4 {
+  text-align: center;
+  font-size: 25px;
+  margin: 2px 12px 8px;
+  color: rgb(250, 171, 0);
+}
+
+.legend span {
+  position: relative;
+  bottom: 3px;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin: 0 8px 0 0;
+  opacity: 1;
+}
+
+.legend i.icon {
+  background-size: 20px;
+  background-color: rgb(255, 255, 255);
 }
 
 /* body {
