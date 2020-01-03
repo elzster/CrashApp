@@ -48,9 +48,9 @@
 					padding-left: 900px;">
 					<a class="nav-link" href="/dash/">Home <span class="sr-only">(current)</span></a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/analysts/">Our Analyst Team Team</a>
-				</li>
+				<!-- <li class="nav-item">
+					<a class="nav-link" href="/analysts/">Analyst Team</a>
+				</li> -->
 				<li class="nav-item">
 					<a class="nav-link" href="https://github.com/elzster/project2.git">GitHub</a>
 				</li>
@@ -60,11 +60,13 @@
 
 	<!-- SideBar Container-->
 	<div class="sidenav">
-		<a href=/dash>CrashApp </a> <a href="/scope/">Project Scope</a>
+		<a href=/dash>CrashApp </a> 
+		<a href="/scope/">Project Scope</a>
+		<a href="/scope/">DataRetrieval</a>
 		<a href="/boroughcomp/">Borough Comparisons</a>
-		<a href="/heatmap/">HeatMapping</a>
 		<a href="/top10/">Top 10 Roads with Frequency</a>
-		<a href="/factors/">Contributing Factors</a>
+		<a href="/heatmap/">HeatMapping</a>
+		<a href="/contrib/">Contributing Factors</a>
 	</div>
 </head>
 <body>
@@ -87,16 +89,17 @@
 						<p>The Project is packed with visualization and analysis of accidents occuring by borough for
 							the month of November 2019!</p>
 						<br>
-						<a class="btn btn-success btn-lg" href="/scope/">Enjoy! »</a>
-					</div>
-					<div class="container">
-						<div class="row">
-							<div class="col-6-md">
-								<div class="svg">
+						<a class="btn btn-success btn-lg text-center" href="/scope/">Enjoy! »</a>
+						<br><br>
+		</header>	</div>
+				<!-- <div class ="container"> -->
+					<div class="row text-center">
+						<div class="col-md-10">
+							<div class="svg">
 									<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 									<!DOCTYPE svg
 										PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-									<div><svg width="100%" height="100%" viewBox="0 0 1702 1567" version="1.1"
+									<div><svg width="30%" height="30%" viewBox="0 0 1702 1567" version="1.1"
 											xmlns="http://www.w3.org/2000/svg"
 											xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
 											xmlns:serif="http://www.serif.com/"
@@ -149,15 +152,15 @@
 												</g>
 											</g>
 										</svg></div>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-		</header>
+			</div>
+		</div>
 	</div>
 </div>
+
 <!-- d3 JavaScript -->
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>

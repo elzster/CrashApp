@@ -57,43 +57,41 @@ def home():
 
     return render_template("index.html")
 
-
 ###DashBoard MainPage####
 @app.route("/dash/")
 def dash():
 
     return render_template("dash.html")
-
+###Comparison Page###
 @app.route("/boroughcomp/")
 def boroughcomp():
 
     return render_template("boroughcomp.html")
 
-
+###Scope Description Page####
 @app.route("/scope/")
 def scope():
 
     return render_template("scope.html")
-
+###HeatMap Page###
 @app.route("/heatmap/")
 def heatmap():
     return render_template("heatmap.html")
-
+###Top 10 Roads Page###
 @app.route("/top10/")
 def bargraph():
     return render_template("topten.html")
 
-@app.route("/piegraph/")
-def piegraph():
-    
-    return render_template('piegraph.html')
-
+###Contributing Factors Page###
 @app.route("/contrib/")
 def contrib():
     
     return render_template('contrib.html')
 
-
+@app.route("/piegraph/")
+def piegraph():
+    
+    return render_template('piegraph.html')
 
 
 ################################################

@@ -4,7 +4,6 @@ body {
 
 .sidenav {
   height: 100%;
-<<<<<<< HEAD
 }
 
 .container_pies{
@@ -18,7 +17,6 @@ right: 10%;
   position: absolute;
   top: 0;
   right: 10%;
-=======
   width: 160px;
   position: fixed;
   /* z-index: 10; */
@@ -69,5 +67,10 @@ right: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
->>>>>>> 350a5fd5434715dd0a5c4f3f9f2d8c9c88836580
+}
+svg {
+  overflow: hidden;
+  vertical-align: middle;
+  /* align-content: center; */
+  /* margin-left: 130px;   */
 }
