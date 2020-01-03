@@ -29,7 +29,12 @@ function plotGraph1() {
     var layout = {
       height: 400,
       width: 400,
-      title: "Number of Fatalities By Borough"
+      title: "Number of Fatalities By Borough",
+      showlegend: false,
+      legend: {
+        x:1,
+        y:0.5
+      }
     };
 
     Plotly.newPlot('plotkilled', data, layout);

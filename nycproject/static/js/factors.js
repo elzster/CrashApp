@@ -50,8 +50,8 @@ factors.then( data =>{
   var data = [contributing];
 
   var layout = {
-    height: 400,
-    width: 400,
+    height: 500,
+    width: 500,
     title: 'Top Contributing Factors',
     xaxis:{
       tickangle:-45

@@ -8,3 +8,16 @@ body,
 html {
   height: 100%;
 }
+
+.container_pies{
+z-index: 100;
+position: absolute;
+top: 0;
+right: 10%;
+}
+
+#cointainer_pies_2{
+  position: absolute;
+  top: 0;
+  right: 10%;
+}

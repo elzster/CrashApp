@@ -48,8 +48,8 @@ topten.then( data =>{
   
 
   var layout = {
-    height: 400,
-    width: 400,
+    height: 500,
+    width: 500,
     title: 'Most Dangerous Roadways',
     xaxis:{
       tickangle: -45
