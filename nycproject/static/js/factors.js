@@ -41,7 +41,7 @@ factors.then( data =>{
     x: listFactor,
     y: listCount,
 
-    name: 'Top 10 Contributing Factors',
+    name: listFactor,
     type: 'bar',
     orientation: 'v'
   };

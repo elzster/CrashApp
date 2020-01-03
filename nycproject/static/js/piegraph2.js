@@ -21,13 +21,20 @@ function plotGraph1() {
     var data = [{
       values: [cyclistKilled, motoristKilled, pedestrianKilled],
       labels: ['Cyclist', 'Motorist', 'Pedestrian'],
+      textinfo: "label+percent",
+      textposition: "outside",
       type: 'pie'
     }];
 
     var layout = {
       height: 400,
       width: 400,
-      title: "Borough Stats of Persons Killed"
+      title: "Number of Fatalities By Borough",
+      showlegend: false,
+      legend: {
+        x:1,
+        y:0.5
+      }
     };
 
     Plotly.newPlot('plotkilled', data, layout);

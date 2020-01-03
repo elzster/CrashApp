@@ -380,5 +380,22 @@ def factoid():
 
     return jsonify(factors) 
 
+@app.route("/totals_boroughs/")
+def totals_boro():
+    
+    
+    borough_total = []
+
+    list_dict = {}
+    list_dict['borough_total'] = {}
+
+    list_dict['borough_total'] = db.session.query(func.sum(crashdata.id), crashdata.borough).\
+    group_by(crashdata.borough).\
+    order_by(func.sum(crashdata.borough).desc()).all()
+    
+    borough_total.append(list_dict)
+
+    return jsonify(borough_total) 
+
 if __name__ == "__main__":
     app.run()

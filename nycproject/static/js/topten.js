@@ -38,16 +38,24 @@ topten.then( data =>{
   let injured = {
     x: listRoads,
     y: listCount,
-    name: 'Top 10 RoadWays',
+    name: listRoads,
     type: 'bar',
     orientation: 'v'
   };
 
 
-  var data = [injured];
+  var data = [injured]
+  
 
-  // var layout = {barmode: 'group'};
+  var layout = {
+    height: 500,
+    width: 500,
+    title: 'Most Dangerous Roadways',
+    xaxis:{
+      tickangle: -45
+    }
+  };
 
-Plotly.newPlot('topten', data);
+Plotly.newPlot('topten', data, layout);
 
 });
