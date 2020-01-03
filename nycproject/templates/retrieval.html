@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Top Contributing Factors</title>
+	<title>Data Retrieval Process</title>
 
 	<!--Local CSS Stylesheet-->
 	<link rel="stylesheet" href="/static/css/eliestyle.css">
@@ -70,34 +70,48 @@
 	</div>
 </head>
 
-<body>
-
-    <div class="main">
-        <div class="jumbotron jumbotron-fluid text-center">
-            <div class="container">
-                <br>
-              <h1 class="display-4">Top Contributing Factors</h1>
-              <p class="lead">Based on the occurances through our dataset, the following visualization shows some of the contributing factors that resulted in many of the accidents.</p>
-            </div>
-          </div>
-        <div class="container" style="
-        padding-top: 60px;">
-            <div class="row">
-                <div class="col-md-12">
-                    
-                    <div id="plotfactor"></div>
+<div class="main">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron jumbotron-fluid text-center">
+                <div class="container">
+                    <br>
+                    <h1 class="display-4">Data Retrieval</h1>
+                    <p class="lead">Here we'll go over some of the Data Retrieval and Refining Process.</a></p>
                 </div>
             </div>
             <div class="container">
                 <div class="row">
-                    
-                    <p>Here we have our Borough Comparisons.  We wanted to see in comparison what the number of injuries were like in comparison to each borough.</p>
+
+                    <div class="col-lg-12">
+
+						<p>Starting Off, All the Data that we access was parsed from the NYC Open Data Website.<br>
+						<a href="https://data.cityofnewyork.us/resource/h9gi-nx95.json">Here is an example</a> of the jSON that we parsed.</p>
+
+						<p>We wanted to make sure our Flask server would communicate and customized the data as we needed for further analysis.<br>
+							Here are some of the mentioned routes:
+							<div class="row">
+								<div class="col-6-md offset-1">
+							<ul>
+								<li><a href="/datafile1">"/datafile1/"</a></li>
+								<li><a href="/borough/queens/">"/borough/{city}/"</a></li>
+								<li><a href="/summary/queens/">"/summary/{city}/"</a></li>
+								<li><a href="/topten/">"/topten/"</a></li>
+								<li><a href="/factors/">"/factors/"</a></li>
+							</ul>
+							<!-- <div class="col"></div> -->
+							<br>
+							</div>
+							<div class="col-6-md offset-2">
+								<img src="/static/jsonsample.png">
+							</div>
+						</div>
+                        <!-- <a class="btn btn-success btn-md" href="/scope/">Enjoy! »</a> -->
+                    </div>
                 </div>
             </div>
-            
+            </header>
         </div>
-    </div>
-    </div>
     </div>
     <!-- d3 JavaScript -->
     <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -106,12 +120,6 @@
     <!-- <script type="text/javascript" src="/static/js/nycBoroughs.js"></script> -->
     <script type="text/javascript" src="/static/js/config.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
-    <!-- <script type="text/javascript" src="/static/js/piegraph.js"></script> -->
-    <!-- <script type="text/javascript" src="/static/js/piegraph2.js"></script> -->
-    <!-- <script type="text/javascript" src="/static/js/topten.js"></script> -->
-    <script type="text/javascript" src="/static/js/factors.js"></script>
-    <!-- <script type="text/javascript" src="/static/js/markercluster.js"></script> -->
-
-</body>
+    </body>
 
 </html>

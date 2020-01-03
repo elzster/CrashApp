@@ -88,10 +88,10 @@ def contrib():
     
     return render_template('contrib.html')
 
-@app.route("/piegraph/")
-def piegraph():
+@app.route("/retrieval/")
+def retrieval():
     
-    return render_template('piegraph.html')
+    return render_template('retrieval.html')
 
 
 ################################################
