@@ -45,11 +45,11 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active" style="
-                padding-left: 900px;">
+                    padding-left: 900px;">
                     <a class="nav-link" href="/dash/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/analysts/">Our Analyst Team Team</a>
+                    <a class="nav-link" href="/analysts/">Our Team</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://github.com/elzster/project2.git">GitHub</a>
@@ -62,49 +62,61 @@
     <div class="sidenav">
         <a href=/dash>CrashApp </a> <a href="/scope/">Project Scope</a>
         <a href="/boroughcomp/">Borough Comparisons</a>
-        <a href="/heatmap/">HeatMapping</a>
         <a href="/top10/">Top 10 Roads with Frequency</a>
+        <a href="/heatmap/">HeatMapping</a>
         <a href="/factors/">Contributing Factors</a>
     </div>
 </head>
+
 <div class="main">
     <div class="row">
-        <div class="col-md-12"></div>
-    </div>
-    <div class="container" style="
-        padding-top: 60px;">
-        <header class="business-header">
+        <div class="col-md-12">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <br>
+                    <h1 class="display-4">Scope</h1>
+                    <p class="lead">For our analysis, we used the provided dataset from <a
+                            href="https://data.cityofnewyork.us/resource/h9gi-nx95.json">NYC OPEN DATA.</a></p>
+                </div>
+            </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12  text-center">
-                        <br><br><br><br><br><br>
-                        <hr>
-                        <h1 class="tagline">Welcome to CrashApp!!!</h1>
-                        <hr>
-                        <p>This is our analysis engine placed together to analyze all crashes occuring in NYC.</p>
-                        <p>The Project is packed with visualization and analysis of accidents occuring by borough for
-                            the month of November 2019!</p>
+
+                    <div class="col-lg-12">
+
+                        <p>The data emcompassed data for the month of November of 2019 and broke down car accidents
+                            within
+                            the boroughs of Manhattan, Queens, Bronx, Brooklyn, and Staten Island.</p>
+
+                        <p>Some of the many questions we set out to answer:
+                            <ul>
+                                <li>Are the Highways More Dangerous than local roadways?</li>
+                                <li>What are the more frequent contributing factors behind some of the crashes?</li>
+                                <li>Are the Ubers really that dangerous? (j/k no specific data to draw conclusion)</li>
+                                <li>Which borough are there a higher number of injuries/fatalities?</li>
+                            </ul>
+                        </p>
                         <br>
-                        <a class="btn btn-success btn-md" href="/scope/">Enjoy! »</a>
+                        <!-- <a class="btn btn-success btn-md" href="/scope/">Enjoy! »</a> -->
                     </div>
                 </div>
             </div>
-        </header>
+            </header>
+        </div>
     </div>
-</div>
-<!-- d3 JavaScript -->
-<script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- d3 JavaScript -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
 
-<!-- Our JavaScript Files -->
-<!-- <script type="text/javascript" src="/static/js/nycBoroughs.js"></script> -->
-<script type="text/javascript" src="/static/js/config.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
-<script type="text/javascript" src="/static/js/piegraph.js"></script>
-<script type="text/javascript" src="/static/js/piegraph2.js"></script>
-<!-- <script type="text/javascript" src="/static/js/topten.js"></script> -->
-<!-- <script type="text/javascript" src="/static/js/factors.js"></script> -->
-<!-- <script type="text/javascript" src="/static/js/markercluster.js"></script> -->
+    <!-- Our JavaScript Files -->
+    <!-- <script type="text/javascript" src="/static/js/nycBoroughs.js"></script> -->
+    <script type="text/javascript" src="/static/js/config.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+    <script type="text/javascript" src="/static/js/piegraph.js"></script>
+    <script type="text/javascript" src="/static/js/piegraph2.js"></script>
+    <!-- <script type="text/javascript" src="/static/js/topten.js"></script> -->
+    <!-- <script type="text/javascript" src="/static/js/factors.js"></script> -->
+    <!-- <script type="text/javascript" src="/static/js/markercluster.js"></script> -->
 
-</body>
+    </body>
 
 </html>
