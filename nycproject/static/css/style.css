@@ -1,12 +1,10 @@
 body {
-  padding: 0;
-  margin: 0;
+  font-family: "Lato", sans-serif;
 }
 
-#map,
-body,
-html {
+.sidenav {
   height: 100%;
+<<<<<<< HEAD
 }
 
 .container_pies{
@@ -20,4 +18,56 @@ right: 10%;
   position: absolute;
   top: 0;
   right: 10%;
+=======
+  width: 160px;
+  position: fixed;
+  /* z-index: 10; */
+  top: 0;
+  left: 0;
+  background-color: #343a40;
+  overflow-x: hidden;
+  padding-top: 20px;
+  margin-top: 0px;
+  margin-bottom: 50px;
+  display: inline-block;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 30px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+.main img {
+    height: 250px;
+    width: 250px;
+    position: fixed;
+    float: left;
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+@media (min-width: 480px) and (max-width: 500px) {
+  .collapse {
+      display: none !important;
+  }
+}
+
+.centerbox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+>>>>>>> 350a5fd5434715dd0a5c4f3f9f2d8c9c88836580
 }
