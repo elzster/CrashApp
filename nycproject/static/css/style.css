@@ -1,39 +1,26 @@
 body {
   font-family: "Lato", sans-serif;
 }
-
+/* body {
+  padding: 0;
+  margin: 0;
+} */
 .sidenav {
   height: 100%;
-}
-
-.container_pies{
-z-index: 100;
-position: absolute;
-top: 0;
-right: 10%;
-}
-
-#cointainer_pies_2{
-  position: absolute;
-  top: 0;
-  right: 10%;
   width: 160px;
   position: fixed;
-  /* z-index: 10; */
+  z-index: 1;
   top: 0;
   left: 0;
   background-color: #343a40;
   overflow-x: hidden;
   padding-top: 20px;
-  margin-top: 0px;
-  margin-bottom: 50px;
-  display: inline-block;
 }
 
 .sidenav a {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 12px;
   color: #818181;
   display: block;
 }
@@ -42,35 +29,77 @@ right: 10%;
   color: #f1f1f1;
 }
 
+
 .main {
   margin-left: 160px; /* Same as the width of the sidenav */
-  font-size: 30px; /* Increased text to enable scrolling */
+  font-size: 28px; /* Increased text to enable scrolling */
   padding: 0px 10px;
 }
-.main img {
-    height: 250px;
-    width: 250px;
-    position: fixed;
-    float: left;
-}
+
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
-@media (min-width: 480px) and (max-width: 500px) {
-  .collapse {
-      display: none !important;
-  }
+
+html, body, #map {
+  position: relative;
+  border: 1px solid black;
+  border-radius: 1px;
+  height: 100%;  /* or as desired */
+  width: 100%;
 }
 
-.centerbox{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.leaflet-popup-content-wrapper {
+  background-color: #000;
+  color: rgb(255, 255, 255)
 }
-svg {
-  overflow: hidden;
-  vertical-align: middle;
-  /* align-content: center; */
-  /* margin-left: 130px;   */
+
+/*Legend specific -- MP */
+.legend {
+  padding: 6px 8px;
+  font: 25px menlo, Helvetica, sans-serif;
+  background: white;
+  background: rgba(2, 2, 2, 0.8);
+  /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+  /*border-radius: 5px;*/
+  line-height: 24px;
+  color: rgb(255, 255, 255);
 }
+
+/*Legend specific -- MP */
+/* Title */
+.legend h4 {
+  text-align: center;
+  font-size: 25px;
+  margin: 2px 12px 8px;
+  color: rgb(250, 171, 0);
+}
+
+.legend span {
+  position: relative;
+  bottom: 3px;
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin: 0 8px 0 0;
+  opacity: 1;
+}
+
+.legend i.icon {
+  background-size: 20px;
+  background-color: rgb(255, 255, 255);
+}
+
+/* body {
+  padding: 0;
+  margin: 0;
+}
+
+#map,
+body,
+html {
+  height: 100%;
+} */
