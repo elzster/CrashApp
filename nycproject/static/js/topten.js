@@ -47,15 +47,15 @@ topten.then( data =>{
   var data = [injured]
   
 
-  var layout = {
-    height: 500,
-    width: 500,
-    title: 'Most Dangerous Roadways',
-    xaxis:{
-      tickangle: -45
-    }
-  };
+  // var layout = {
+  //   height: 800,
+  //   width: 800,
+  //   title: 'Top 10 Dangerous Roadways',
+  //   xaxis:{
+  //     tickangle: -45
+  //   }
+  // };
 
-Plotly.newPlot('topten', data, layout);
+Plotly.newPlot('topten', data);
 
 });
