@@ -75,8 +75,8 @@ def scope():
 
     return render_template("scope.html")
 
-@app.route("/maps/")
-def maps():
+@app.route("/heatmap/")
+def heatmap():
     return render_template("heatmap.html")
 
 @app.route("/top10/")
@@ -88,10 +88,10 @@ def piegraph():
     
     return render_template('piegraph.html')
 
-@app.route("/donut/")
-def donut():
+@app.route("/contrib/")
+def contrib():
     
-    return render_template('donut.html')
+    return render_template('contrib.html')
 
 
 
@@ -372,7 +372,11 @@ def factoid():
     group_by(crashdata.contributing_factors).\
     order_by(func.count(crashdata.contributing_factors).desc()).limit(10).all()
     
+    del list_dict['factors'][1:3]
+
     factors.append(list_dict)
+
+    
 
     return jsonify(factors) 
 

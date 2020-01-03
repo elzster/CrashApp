@@ -68,22 +68,30 @@
 	</div>
 </head>
 
-<body>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<div id="topten"></div>
-			</div>
-			<div class="col-md-6">
-
-			</div>
-
+<div class="main">
+	<div class="jumbotron jumbotron-fluid text-center">
+		<div class="container">
+			<br>
+			<h1 class="display-4">Top 10 Roads with Car Incidents</h1>
+			<p class="lead">Here we analyzed the Top 10 roads in our datasets with the most car accidents</p>
 		</div>
 	</div>
+	<!--Appends Top Ten Map to HTML-->
+	<div id="topten"></div>
+</div>
+<br>
+<br>
 
-	<script src="https://d3js.org/d3.v5.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
-	<script src="/static/js/topten.js"></script>
+<div class="col-md-12 text-center">
+	<a class="btn btn-success btn-lg" href="/heatmap/">SHOW ME THE HEATMAPS! »</a>
+</div>
+
+</div>
+</div>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+<script src="/static/js/topten.js"></script>
 
 </body>
 

@@ -74,37 +74,16 @@
         <div class="jumbotron jumbotron-fluid text-center">
             <div class="container">
                 <br>
-              <h1 class="display-4">Borough Comparisons of Injuries vs Fatalities</h1>
-              <p class="lead">Here we have our Borough Comparisons.  We wanted to see in comparison what the number of injuries were like in comparison to each borough.</p>
+              <h1 class="display-4">Top Contributing Factors</h1>
+              <p class="lead">Based on the occurances through our dataset, the following visualization shows some of the contributing factors that resulted in many of the accidents.</p>
             </div>
           </div>
-        <div class="row">
-            <div class="col-md-12"></div>
-        </div>
         <div class="container" style="
         padding-top: 60px;">
             <div class="row">
-                <div class="col-md-6">
-                    <select id="selDataset" onchange="getData(this.value)">
-                        <option value="Manhattan">Manhattan</option>
-                        <option value="Queens">Queens</option>
-                        <option value="Bronx">Bronx</option>
-                        <option value="Brooklyn">Brooklyn</option>
-                        <option value="Staten Island">Staten Island</option>
-                    </select>
-                    <div id="plotinjured"></div>
-                </div>
-
-                <div class="col-md-6">
-                    <select id="selDataset1" onchange="getData1(this.value)">
-                        <option value="Manhattan">Manhattan</option>
-                        <option value="Queens">Queens</option>
-                        <option value="Bronx">Bronx</option>
-                        <option value="Brooklyn">Brooklyn</option>
-                        <option value="Staten Island">Staten Island</option>
-                    </select>
-
-                    <div id="plotkilled"></div>
+                <div class="col-md-12">
+                    
+                    <div id="plotfactor"></div>
                 </div>
             </div>
             <div class="container">
@@ -125,10 +104,10 @@
     <!-- <script type="text/javascript" src="/static/js/nycBoroughs.js"></script> -->
     <script type="text/javascript" src="/static/js/config.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
-    <script type="text/javascript" src="/static/js/piegraph.js"></script>
-    <script type="text/javascript" src="/static/js/piegraph2.js"></script>
+    <!-- <script type="text/javascript" src="/static/js/piegraph.js"></script> -->
+    <!-- <script type="text/javascript" src="/static/js/piegraph2.js"></script> -->
     <!-- <script type="text/javascript" src="/static/js/topten.js"></script> -->
-    <!-- <script type="text/javascript" src="/static/js/factors.js"></script> -->
+    <script type="text/javascript" src="/static/js/factors.js"></script>
     <!-- <script type="text/javascript" src="/static/js/markercluster.js"></script> -->
 
 </body>

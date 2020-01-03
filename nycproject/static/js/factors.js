@@ -49,8 +49,8 @@ factors.then( data =>{
 
   var data = [contributing];
 
-  // var layout = {barmode: 'group'};
+  var layout = {title: 'Top Contributing Factors'};
 
-Plotly.newPlot('plotfactor', data)
+Plotly.newPlot('plotfactor', data, layout)
 
 });
