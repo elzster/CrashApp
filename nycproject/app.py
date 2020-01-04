@@ -86,6 +86,11 @@ def retrieval():
     
     return render_template('retrieval.html')
 
+@app.route("/clusters/")
+def clusters():
+    
+    return render_template('clusters.html')
+
 @app.route("/testing/")
 def testing():
     

@@ -27,7 +27,7 @@ function plotInjured() {
     let layout = {
       height: 400,
       width: 400,
-      title: "Number of Injuried By Borough",
+      title: "Breakdown of Injuries by Category",
       showlegend: false,
     };
 

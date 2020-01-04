@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Borough Comparisons</title>
+	<title>Dash</title>
 
 	<!--Local CSS Stylesheet-->
 	<link rel="stylesheet" href="/static/css/eliestyle.css">
@@ -46,92 +46,102 @@
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active" style="
 					padding-left: 900px;">
-					<a class="nav-link" href="/dash/">Home <span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="/dash/"><button type="button" class="btn btn-secondary">Home <span
+								class="sr-only">(current)</span></button></button></a>
 				</li>
-				<!-- <li class="nav-item">
-					<a class="nav-link" href="/analysts/">Analyst Team</a>
-				</li> -->
 				<li class="nav-item">
-					<a class="nav-link" href="https://github.com/elzster/project2.git">GitHub</a>
+					<a class="nav-link" href="/clusters/"><button type="button" class="btn btn-secondary">Previous
+							Page</button></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/top10/"><button type="button" class="btn btn-secondary">Next
+							Page</button></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://github.com/elzster/project2.git"><button type="button"
+							class="btn btn-secondary">GitHub</button></a>
 				</li>
 			</ul>
 		</div>
 	</nav>
+</head>
 
-	<!-- SideBar Container-->
-	<div class="sidenav">
-		<a href=/dash>CrashApp </a> 
-		<a href="/scope/">Project Scope</a>
-		<a href="/boroughcomp/">Borough Comparisons</a>
-		<a href="/top10/">Top 10 Roads with Frequency</a>
-		<a href="/heatmap/">HeatMapping</a>
-		<a href="/contrib/">Contributing Factors</a>
-		<a href="/retrieval/">DataRetrieval</a>
-	</div>
+<!-- SideBar Container-->
+<div class="sidenav">
+	<a href=/dash>CrashApp </a> <a href="/scope/">Project Scope</a>
+	<a href="/clusters/">Incidents Overview</a>
+	<a href="/boroughcomp/">Borough Comparisons</a>
+	<a href="/top10/">Top 10 Roads with Frequency</a>
+	<a href="/heatmap/">HeatMapping</a>
+	<a href="/contrib/">Contributing Factors</a>
+	<a href="/retrieval/">DataRetrieval</a>
+</div>
 </head>
 
 <body>
 
-    <div class="main">
-        <div class="jumbotron jumbotron-fluid text-center">
-            <div class="container">
-                <br>
-              <h1 class="display-4">Borough Comparisons of Injuries vs Fatalities</h1>
-              <p class="lead">Here we have our Borough Comparisons.  We wanted to see in comparison what the number of injuries were like in comparison to each borough.</p>
-            </div>
-          </div>
-        <div class="row">
-            <div class="col-md-12"></div>
-        </div>
-        <div class="container" style="
+	<div class="main">
+		<div class="jumbotron jumbotron-fluid text-center">
+			<div class="container">
+				<br>
+				<h1 class="display-4">Borough Comparisons of Injuries vs Fatalities</h1>
+				<p class="lead">Here we have our Borough Comparisons. We wanted to see in comparison what the number of
+					injuries were like in comparison to each borough.</p>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<p>Below is visualizing some of the information regarding the amount of totals by borough. We have extra
+					graphs breaking down the amount of injuriees and fatalities by borough.</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-1 offset-3"></div>
+			<div id="bartotals"></div>
+		</div>
+		<div class="container" style="
         padding-top: 60px;">
-            <div class="row">
-                <div class="col-md-6">
-                    <select id="selDataset" onchange="getData(this.value)">
-                        <option value="Manhattan">Manhattan</option>
-                        <option value="Queens">Queens</option>
-                        <option value="Bronx">Bronx</option>
-                        <option value="Brooklyn">Brooklyn</option>
-                        <option value="Staten Island">Staten Island</option>
-                    </select>
-                    <div id="plotinjured"></div>
-                </div>
+			<div class="row">
+				<div class="col-md-4">
+					<select id="selDataset" onchange="getData(this.value)">
+						<option value="Manhattan">Manhattan</option>
+						<option value="Queens">Queens</option>
+						<option value="Bronx">Bronx</option>
+						<option value="Brooklyn">Brooklyn</option>
+						<option value="Staten Island">Staten Island</option>
+					</select>
+					<div id="plotinjured"></div>
+				</div>
 
-                <div class="col-md-6">
-                    <select id="selDataset1" onchange="getData1(this.value)">
-                        <option value="Manhattan">Manhattan</option>
-                        <option value="Queens">Queens</option>
-                        <option value="Bronx">Bronx</option>
-                        <option value="Brooklyn">Brooklyn</option>
-                        <option value="Staten Island">Staten Island</option>
-                    </select>
+				<div class="col-md-4 offset-2">
+					<select id="selDataset1" onchange="getData1(this.value)">
+						<option value="Manhattan">Manhattan</option>
+						<option value="Queens">Queens</option>
+						<option value="Bronx">Bronx</option>
+						<option value="Brooklyn">Brooklyn</option>
+						<option value="Staten Island">Staten Island</option>
+					</select>
 
-                    <div id="plotkilled"></div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    
-                    <p>Here we have our Borough Comparisons.  We wanted to see in comparison what the number of injuries were like in comparison to each borough.</p>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-    </div>
-    </div>
-    <!-- d3 JavaScript -->
-    <script src="https://d3js.org/d3.v5.min.js"></script>
+					<div id="plotkilled"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+	<!-- d3 JavaScript -->
+	<script src="https://d3js.org/d3.v5.min.js"></script>
 
-    <!-- Our JavaScript Files -->
-    <!-- <script type="text/javascript" src="/static/js/nycBoroughs.js"></script> -->
-    <script type="text/javascript" src="/static/js/config.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
-    <script type="text/javascript" src="/static/js/piegraph.js"></script>
-    <script type="text/javascript" src="/static/js/piegraph2.js"></script>
-    <!-- <script type="text/javascript" src="/static/js/topten.js"></script> -->
-    <!-- <script type="text/javascript" src="/static/js/factors.js"></script> -->
-    <!-- <script type="text/javascript" src="/static/js/markercluster.js"></script> -->
+	<!-- Our JavaScript Files -->
+	<!-- <script type="text/javascript" src="/static/js/nycBoroughs.js"></script> -->
+	<script type="text/javascript" src="/static/js/config.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+	<script type="text/javascript" src="/static/js/piegraph.js"></script>
+	<script type="text/javascript" src="/static/js/piegraph2.js"></script>
+	<script type="text/javascript" src="/static/js/totals.js"></script>
+	<!-- <script type="text/javascript" src="/static/js/topten.js"></script> -->
+	<!-- <script type="text/javascript" src="/static/js/factors.js"></script> -->
+	<!-- <script type="text/javascript" src="/static/js/markercluster.js"></script> -->
 
 </body>
 

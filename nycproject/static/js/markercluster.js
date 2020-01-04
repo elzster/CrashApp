@@ -1,4 +1,8 @@
-var myMap = L.map("clustermap", {
+// #############################################################
+// ############## Leaflet - Marker Cluster Group ###############
+// #############################################################
+
+var myMap = L.map("map", {
     center: [40.7, -73.95],
     zoom: 10
 });
@@ -11,27 +15,11 @@ L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/
     accessToken: API_KEY
 }).addTo(myMap);
 
-// Create a baseMaps object to hold the lightmap layer
-// var baseMaps = {
-//     "Light Map": lightmap
-// };  
-
-
-// var url = "/data/data.geojson"
-// Contains "null" values
 var url = `/geojson/`
-
-// var url = "/nycproject/static/js/cartodb.geojson"
 
 d3.json(url).then( function(data) {
     console.log(data);
 })
-
-// var urlCrashMapper = "http://crashmapper.org/#/?cfat=true&cinj=true&endDate=2019-11&geo=citywide&identifier=&lat=40.68089838511525&lng=-73.89541625976562&lngLats=%255B%255D&mfat=true&minj=true&noInjFat=false&pfat=true&pinj=true&startDate=2019-11&zoom=11";
-
-// var nycOpenDataJSON = "https://data.cityofnewyork.us/resource/h9gi-nx95.json";
-
-// var nycOpenDataGeoJSON = "https://data.cityofnewyork.us/resource/h9gi-nx95.geojson";
 
 d3.json(url).then( function(response) {
     var markers = L.markerClusterGroup();

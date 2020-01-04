@@ -28,7 +28,7 @@ var data = [trace1, trace2, trace3];
 
 var layout = {
   barmode: 'group',
-  title: 'Borough Totals'
+  title: 'Grouped Borough Totals'
 };
 
-Plotly.newPlot('totals', data, layout);
+Plotly.newPlot('bartotals', data, layout);
