@@ -6,7 +6,8 @@ https://project2emjj.herokuapp.com/dash/
 ## An analysis engine using NYC Open Data using SQL, SQL Alchemy, Javascript, D3, Plotly, Leaflet, Heroku, Flask and Python
 
 Source:
-![NYC Open Data]("https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95")
+[NYC Open Data](https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95)
+https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95
 
 ### The Project is packed with visualizations and analysis of NYC Car accidents for November 2019
 
@@ -19,7 +20,7 @@ Source:
 ## Data Retrieval
 
 All of the data was parsed using API requested from NYC Open Data Website. 
-![Here is an example](https://data.cityofnewyork.us/resource/h9gi-nx95.json) of the JSON. 
+[Here is an example](https://data.cityofnewyork.us/resource/h9gi-nx95.json) of the JSON. 
 
 ## Our Team
 
