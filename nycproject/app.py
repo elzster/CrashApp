@@ -91,6 +91,11 @@ def clusters():
     
     return render_template('clusters.html')
 
+@app.route("/team/")
+def team():
+    
+    return render_template('team.html')
+
 @app.route("/testing/")
 def testing():
     
