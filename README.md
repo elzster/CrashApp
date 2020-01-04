@@ -7,7 +7,6 @@ https://project2emjj.herokuapp.com/dash/
 
 Source:
 [NYC Open Data](https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95)
-https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95
 
 ### The Project is packed with visualizations and analysis of NYC Car accidents for November 2019
 
