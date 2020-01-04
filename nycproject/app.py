@@ -95,6 +95,11 @@ def clusters():
 def testing():
     
     return render_template('testing1.html')
+
+@app.route("/team/")
+def team():
+    
+    return render_template('team.html')
 ################################################
 ##Route for GeoJson Data for Cloropleth Maps ###
 ################################################
