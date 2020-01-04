@@ -35,7 +35,9 @@ mapkey = os.environ.get('MAPKEY', '') or "CREATE MAPKEY ENV"
 #################################################
 
 from flask_sqlalchemy import SQLAlchemy
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db/nyc.sqlite"
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/nyc.sqlite"
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db/nyc.sqlite"
 db = SQLAlchemy(app)
 from .models import crashdata
 Base = automap_base()
