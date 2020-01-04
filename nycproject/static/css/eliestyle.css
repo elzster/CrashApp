@@ -37,3 +37,8 @@ body {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+img {
+  height: 250px;
+  width: 200px;
+}

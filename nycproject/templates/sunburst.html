@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Custom D3 Sunburst</title>
+    <link rel="stylesheet" href="/static/css/eliestyle.css">
+    
+    <!--BootStrap Dependencies-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+<!-- Styles -->
+<style>
+#chartdiv {
+    height: 650px;
+}
+
+#filter-id-96 {
+    display:none
+}
+</style>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/plugins/sunburst.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/dataviz.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+<!-- Chart code -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_dataviz);
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// create chart
+var chart = am4core.create("chartdiv", am4plugins_sunburst.Sunburst);
+chart.padding(0,0,0,0);
+chart.radius = am4core.percent(98);
+
+chart.data = [
+
+{
+    name: "Queens",
+    children: [
+    {
+        name: "Total Injured",
+        children: [
+            { name: "Cyclist Injured", value: 49 },
+            { name: "Motorist Injured", value: 1026 },
+            { name: "Pedestrian Injured", value: 255 }
+        ]
+    },
+    {
+        name: "Total Fatal",
+        children: [
+            { name: "Cyclist Fatal", value: 0 },
+            { name: "Motorist Fatal", value: 1 },
+            { name: "Pedestrian Fatal", value: 5 } 
+        ]
+    }
+]
+},
+
+{
+    name: "Manhattan",
+    children: [
+    {
+        name: "Total Injured",
+        children: [
+            { name: "Cyclist Injured", value: 89 },
+            { name: "Motorist Injured", value: 320 },
+            { name: "Pedestrian Injured", value: 152 }
+        ]
+    },
+    {
+        name: "Total Fatal",
+        children: [
+            { name: "Cyclist Fatal", value: 1 },
+            { name: "Motorist Fatal", value: 1 },
+            { name: "Pedestrian Fatal", value: 1 } 
+        ]
+    }
+]
+},
+
+{
+    name: "Bronx",
+    children: [
+    {
+        name: "Total Injured",
+        children: [
+            { name: "Cyclist Injured", value: 19 },
+            { name: "Motorist Injured", value: 555 },
+            { name: "Pedestrian Injured", value: 148 }
+        ]
+    },
+    {
+        name: "Total Fatal",
+        children: [
+            { name: "Cyclist Fatal", value: 0 },
+            { name: "Motorist Fatal", value: 1 },
+            { name: "Pedestrian Fatal", value: 1 } 
+        ]
+    }
+]
+},
+
+{
+    name: "Brooklyn",
+    children: [
+    {
+        name: "Total Injured",
+        children: [
+            { name: "Cyclist Injured", value: 82 },
+            { name: "Motorist Injured", value: 1021 },
+            { name: "Pedestrian Injured", value: 317 }
+        ]
+    },
+    {
+        name: "Total Fatal",
+        children: [
+            { name: "Cyclist Fatal", value: 0 },
+            { name: "Motorist Fatal", value: 1 },
+            { name: "Pedestrian Fatal", value: 1 } 
+        ]
+    }
+]
+},
+
+{
+    name: "Staten Island",
+    children: [
+    {
+        name: "Total Injured",
+        children: [
+            { name: "Cyclist Injured", value: 3 },
+            { name: "Motorist Injured", value: 207 },
+            { name: "Pedestrian Injured", value: 39 }
+        ]
+    },
+    {
+        name: "Total Fatal",
+        children: [
+            { name: "Cyclist Fatal", value: 0 },
+            { name: "Motorist Fatal", value: 1 },
+            { name: "Pedestrian Fatal", value: 0 } 
+        ]
+    }
+]
+},
+
+];
+
+chart.colors.step = 2;
+chart.fontSize = 11;
+chart.innerRadius = am4core.percent(10);
+
+// define data fields
+chart.dataFields.value = "value";
+chart.dataFields.name = "name";
+chart.dataFields.children = "children";
+
+
+var level0SeriesTemplate = new am4plugins_sunburst.SunburstSeries();
+level0SeriesTemplate.hiddenInLegend = false;
+chart.seriesTemplates.setKey("0", level0SeriesTemplate)
+
+// this makes labels to be hidden if they don't fit
+level0SeriesTemplate.labels.template.truncate = true;
+level0SeriesTemplate.labels.template.hideOversized = true;
+
+level0SeriesTemplate.labels.template.adapter.add("rotation", function(rotation, target) {
+  target.maxWidth = target.dataItem.slice.radius - target.dataItem.slice.innerRadius - 10;
+  target.maxHeight = Math.abs(target.dataItem.slice.arc * (target.dataItem.slice.innerRadius + target.dataItem.slice.radius) / 2 * am4core.math.RADIANS);
+
+  return rotation;
+})
+
+
+var level1SeriesTemplate = level0SeriesTemplate.clone();
+chart.seriesTemplates.setKey("1", level1SeriesTemplate)
+level1SeriesTemplate.fillOpacity = 0.75;
+level1SeriesTemplate.hiddenInLegend = true;
+
+var level2SeriesTemplate = level0SeriesTemplate.clone();
+chart.seriesTemplates.setKey("2", level2SeriesTemplate)
+level2SeriesTemplate.fillOpacity = 0.5;
+level2SeriesTemplate.hiddenInLegend = true;
+
+chart.legend = new am4charts.Legend();
+
+}); // end am4core.ready()
+</script>
+	<!--BootStrap Dependencies-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+
+    <!--Top Nav Bar/Drop Downs-->
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		<a class="navbar-brand" href="/dash/">CrashApp</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+			aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active" style="
+					padding-left: 35px;">
+					<a class="nav-link" href="/dash/"><button type="button" class="btn btn-secondary">Home <span class="sr-only">(current)</span></button></button></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/boroughcomp/"><button type="button" class="btn btn-secondary">Previous Page</button></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/top10/"><button type="button" class="btn btn-secondary">Next Page</button></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://github.com/elzster/project2.git"><button type="button" class="btn btn-secondary">GitHub</button></a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+<!-- SideBar Container-->
+<div class="sidenav">
+    <a href=/dash>CrashApp </a> 
+    <a href="/scope/">Project Scope</a>
+    <a href="/clusters/">Incidents Overview</a>
+    <a href="/boroughcomp/">Borough Comparisons</a>
+    <a href="/sunburst/">Borough Comparisons (cont.)</a>
+    <a href="/top10/">Top 10 Roads with Frequency</a>
+    <a href="/heatmap/">HeatMapping</a>
+    <a href="/contrib/">Contributing Factors</a>
+    <a href="/retrieval/">DataRetrieval</a>
+</div>
+</head>
+
+<body>
+    <div class="main">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron jumbotron-fluid text-center">
+                <div class="container"style="
+                margin-top: 35px;">
+                    <br>
+                    <h1 class="display-4">Statistics Overview by Borough</h1>
+                    <p class="lead">Below is our sunburst chart plotting overall Statistics of all boroughs.</p>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div id="chartdiv"></div>
+
+							<div class="row">
+								<div class="col-6-md offset-1">
+							
+							<!-- <div class="col"></div> -->
+							<br>
+							</div>
+							<div class="col-6-md offset-2">
+								
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<!-- HTML -->
+
+</body>
+</html>

@@ -101,10 +101,10 @@ def testing():
     
     return render_template('testing1.html')
 
-@app.route("/team/")
-def team():
+@app.route("/sunburst/")
+def sunburst():
     
-    return render_template('team.html')
+    return render_template('sunburst.html')
 ################################################
 ##Route for GeoJson Data for Cloropleth Maps ###
 ################################################
