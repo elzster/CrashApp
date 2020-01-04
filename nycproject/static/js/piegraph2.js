@@ -29,7 +29,7 @@ function plotGraph1() {
     var layout = {
       height: 400,
       width: 400,
-      title: "Number of Fatalities By Borough",
+      title: "Breakdown of Fatalities by Category",
       showlegend: false,
       legend: {
         x:1,
