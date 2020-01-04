@@ -189,6 +189,10 @@ level0SeriesTemplate.labels.template.adapter.add("rotation", function(rotation, 
   return rotation;
 })
 
+var title = chart.titles.create();
+title.text = "Injured vs. Fatal Stats per Borough";
+title.fontSize = 25;
+title.marginBottom = 30;
 
 var level1SeriesTemplate = level0SeriesTemplate.clone();
 chart.seriesTemplates.setKey("1", level1SeriesTemplate)
