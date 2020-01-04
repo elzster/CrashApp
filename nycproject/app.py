@@ -86,7 +86,10 @@ def retrieval():
     
     return render_template('retrieval.html')
 
-
+@app.route("/testing/")
+def testing():
+    
+    return render_template('testing1.html')
 ################################################
 ##Route for GeoJson Data for Cloropleth Maps ###
 ################################################
