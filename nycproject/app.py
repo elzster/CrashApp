@@ -41,13 +41,6 @@ from .models import crashdata
 Base = automap_base()
 Base.prepare(db.engine, reflect=True)
 
-
-
-
-
-
-
-
 ###############################################
 #########Html Routes for Web Server ###########
 ###############################################
@@ -55,7 +48,7 @@ Base.prepare(db.engine, reflect=True)
 @app.route("/")
 def home():
 
-    return render_template("index.html")
+    return render_template("dash.html")
 
 ###DashBoard MainPage####
 @app.route("/dash/")
