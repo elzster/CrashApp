@@ -1,13 +1,34 @@
-# Project 2 - NYC Crash App
+## Welcome to CrashApp! 
+### Our Heroku App:
+https://project2emjj.herokuapp.com/dash/
 
-Specific Requirements
 
-1.Your visualization must include a Python Flask–powered RESTful API, HTML/CSS, JavaScript, and at least one database (SQL, MongoDB, SQLite, etc.). 
+## An analysis engine using NYC Open Data using SQL, Javascript, D3, Plotly, Heroku, Flask and Python
 
-2.Your project should fall into one of the below four tracks:○A custom “creative” D3.js project (i.e., a nonstandard graph or chart)○A combination of web scraping and Leaflet or Plotly○A dashboard page with multiple charts that update from the same data○A “thick” server that performs multiple manipulations on data in a database prior to visualization (must be approved)
+Source:
+![NYC Open Data](https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95)
+]
+### The Project is packed with visualizations and analysis of NYC Car accidents for November 2019
 
-3.Your project should include at least one JS library that we did not cover.
+## Setup:
+1. Clone the repo
+2. Start the Flask by runing ./run_win.bat from the terminal in the parent directory.
 
-4.Your project must be powered by a data set with at least 100 records.
+![run](https://github.com/elzster/project2/blob/master/nycproject/static/snips/initialSetup.PNG)
 
-5.Your project must include some level of user-driven interaction (e.g., menus, dropdowns, textboxes).6.Your final visualization should ideally include at least three views.
+## Data Retrieval
+
+All of the data was parsed using API requested from NYC Open Data Website. 
+![Here is an example](https://data.cityofnewyork.us/resource/h9gi-nx95.json) of the JSON. 
+
+## Our Team
+
+![The Analysts](https://github.com/elzster/project2/blob/master/nycproject/static/snips/AnalystTeam.PNG)
+
+
+## Thank you! 
+Please contact us with any questions of issues with this repo. 
+
+This is an Open Source repository. Feel free to fork or clone. 
+All donations will go towards protecting and feeding orphaned baby yodas. 
+
