@@ -1,3 +1,3 @@
-set FLASK_APP=nycproject/app.py 
-set FLASK_ENV=development
+set FLASK_APP=nycproject.app:app
+set FLASK_DEBUG=1
 flask run

@@ -12,7 +12,20 @@ Source:
 
 ## Setup:
 1. Clone the repo
-2. Start the Flask by runing ./run_win.bat from the terminal in the parent directory.
+2. Create and activate a virtual environment.
+3. Install the dependencies with `pip install -r requirements.txt`.
+4. Start Flask with `flask --app nycproject.app run`, or run `./run_win.bat` on Windows.
+5. Visit `http://127.0.0.1:5000/dash/`.
+
+## Maintenance
+
+The project has been updated from the original 2019 dependency pins to run on modern Flask, Flask-SQLAlchemy, SQLAlchemy, pandas, and NumPy. The bundled SQLite database at `nycproject/db/nyc.sqlite` is used by default.
+
+Run the smoke tests with:
+
+```bash
+python -m unittest discover -s tests
+```
 
 ![run](https://github.com/elzster/project2/blob/master/nycproject/static/snips/initialSetup.PNG)
 
@@ -31,4 +44,3 @@ Please contact us with any questions of issues with this repo.
 
 This is an Open Source repository. Feel free to fork or clone. 
 All donations will go towards protecting and feeding orphaned baby yodas. 
-
