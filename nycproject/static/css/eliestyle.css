@@ -3,6 +3,7 @@ body {
   color: #111827;
   font-family: "Lato", "Inter", "Segoe UI", sans-serif;
   overflow-x: hidden;
+  scroll-padding-top: 120px;
 }
 
 .navbar.fixed-top.bg-dark {
@@ -185,14 +186,17 @@ body .jumbotron .lead {
     display: flex !important;
     gap: 8px;
     height: auto;
+    left: auto;
+    margin-top: 56px;
     overflow-x: auto;
     overflow-y: hidden;
     padding: 8px 10px;
-    position: fixed;
+    position: relative;
     scrollbar-width: none;
-    top: 56px;
+    top: auto;
     white-space: nowrap;
     width: 100%;
+    z-index: 1;
   }
 
   .sidenav::-webkit-scrollbar {
@@ -218,7 +222,7 @@ body .jumbotron .lead {
 
   .main {
     margin-left: 0;
-    padding: 42px 0 32px;
+    padding: 0 0 32px;
     width: 100%;
   }
 

@@ -3,6 +3,7 @@ body {
   color: #111827;
   font-family: "Lato", "Inter", "Segoe UI", sans-serif;
   overflow-x: hidden;
+  scroll-padding-top: 120px;
 }
 
 .navbar.fixed-top.bg-dark {
@@ -154,17 +155,121 @@ body .jumbotron .lead {
 @media screen and (max-width: 768px) {
   .navbar.fixed-top.bg-dark {
     min-height: 56px;
+    padding: 0.45rem 0.85rem;
+  }
+
+  .navbar .navbar-collapse {
+    padding-top: 0.65rem;
+  }
+
+  .navbar .nav-item {
+    margin-right: 0;
+    padding-left: 0 !important;
+    width: 100%;
+  }
+
+  .navbar .nav-link {
+    padding: 0.25rem 0;
+  }
+
+  .navbar .btn-secondary {
+    padding: 0.7rem 0.85rem;
+    text-align: left;
+    width: 100%;
   }
 
   .sidenav {
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 0;
+    box-shadow: 0 10px 24px rgba(17, 24, 39, 0.18);
+    display: flex !important;
+    gap: 8px;
+    height: auto;
+    left: auto;
+    margin-top: 56px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 8px 10px;
+    position: relative;
+    scrollbar-width: none;
+    top: auto;
+    white-space: nowrap;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .sidenav::-webkit-scrollbar {
     display: none;
+  }
+
+  .sidenav:hover,
+  .sidenav:focus-within {
+    box-shadow: 0 10px 24px rgba(17, 24, 39, 0.18);
+    padding: 8px 10px;
+    width: 100%;
+  }
+
+  .sidenav a {
+    background: rgba(255, 255, 255, 0.06);
+    flex: 0 0 auto;
+    font-size: 0.82rem;
+    margin-bottom: 0;
+    max-width: none;
+    opacity: 1;
+    padding: 8px 10px;
   }
 
   .main {
     margin-left: 0;
+    padding: 0 0 32px;
+    width: 100%;
   }
 
   body .jumbotron {
-    padding: 4.25rem 1rem 3rem;
+    padding: 3.2rem 1rem 2.35rem;
+  }
+
+  body .jumbotron .container {
+    margin-top: 0 !important;
+  }
+
+  body .jumbotron .display-4 {
+    font-size: clamp(2rem, 11vw, 3rem);
+    line-height: 1.08;
+  }
+
+  body .jumbotron .lead {
+    font-size: 1rem;
+  }
+
+  .analysis-shell,
+  .sunburst-shell,
+  .landing-shell,
+  .map-shell {
+    border-left: 0;
+    border-radius: 0;
+    border-right: 0;
+    margin: 0 auto 22px;
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 18px 14px;
+  }
+
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .js-plotly-plot,
+  .plot-container,
+  .svg-container {
+    max-width: 100%;
+  }
+
+  .story-stat strong {
+    font-size: 1.35rem;
   }
 }
