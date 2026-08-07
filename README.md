@@ -1,25 +1,67 @@
-## Welcome to CrashApp! 
-### Our Heroku App:
-https://project2emjj.herokuapp.com/dash/
+# CrashApp
 
+CrashApp is a Flask dashboard for exploring NYC motor vehicle collision data. It uses a bundled SQLite dataset for November 2019 and presents the analysis through interactive maps, borough comparisons, ranked roadway charts, contributing-factor charts, and Python-built Plotly visualizations.
 
-## An analysis engine using NYC Open Data using SQL, SQL Alchemy, Javascript, D3, Plotly, Leaflet, Heroku, Flask and Python
+## Data Source
 
-Source:
-[NYC Open Data](https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95)
+The original crash records come from NYC Open Data:
+[Motor Vehicle Collisions - Crashes](https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95)
 
-### The Project is packed with visualizations and analysis of NYC Car accidents for November 2019
+The app runs locally from the bundled database:
 
-## Setup:
-1. Clone the repo
+```text
+nycproject/db/nyc.sqlite
+```
+
+## Features
+
+- Modern Flask app with SQLite-backed routes
+- Python-generated Plotly charts for borough, roadway, contributing-factor, and sunburst views
+- Leaflet maps for incident clusters and crash heatmaps
+- Responsive dark navigation and auto-collapsing side rail
+- Smoke tests for key HTML and JSON routes
+
+## Main Pages
+
+- `/dash/` - Landing page and project overview
+- `/clusters/` - Incident cluster map
+- `/boroughcomp/` - Borough comparison charts
+- `/sunburst/` - Borough outcome sunburst
+- `/top10/` - Top crash-frequency roads
+- `/heatmap/` - Crash density heatmap
+- `/contrib/` - Top contributing factors
+- `/retrieval/` - Data retrieval notes and API examples
+- `/team/` - Project team page
+
+## Local Setup
+
+1. Clone the repository.
 2. Create and activate a virtual environment.
-3. Install the dependencies with `pip install -r requirements.txt`.
-4. Start Flask with `flask --app nycproject.app run`, or run `./run_win.bat` on Windows.
-5. Visit `http://127.0.0.1:5000/dash/`.
+3. Install dependencies:
 
-## Maintenance
+```bash
+pip install -r requirements.txt
+```
 
-The project has been updated from the original 2019 dependency pins to run on modern Flask, Flask-SQLAlchemy, SQLAlchemy, pandas, and NumPy. The bundled SQLite database at `nycproject/db/nyc.sqlite` is used by default.
+4. Start Flask:
+
+```bash
+flask --app nycproject.app run
+```
+
+On Windows, you can also run:
+
+```bat
+run_win.bat
+```
+
+5. Open the dashboard:
+
+```text
+http://127.0.0.1:5000/dash/
+```
+
+## Tests
 
 Run the smoke tests with:
 
@@ -27,20 +69,18 @@ Run the smoke tests with:
 python -m unittest discover -s tests
 ```
 
-![run](https://github.com/elzster/project2/blob/master/nycproject/static/snips/initialSetup.PNG)
+## Maintenance Notes
 
-## Data Retrieval
+This project was originally built in 2019 and has since been updated to run on modern Flask, Flask-SQLAlchemy, SQLAlchemy, pandas, NumPy, and Plotly. The current UI refresh keeps the original data story while replacing much of the older hardcoded JavaScript charting with Python-generated visualizations.
 
-All of the data was parsed using API requested from NYC Open Data Website. 
-[Here is an example](https://data.cityofnewyork.us/resource/h9gi-nx95.json) of the JSON. 
+## Tech Stack
 
-## Our Team
-
-![The Analysts](https://github.com/elzster/project2/blob/master/nycproject/static/snips/AnalystTeam.PNG)
-
-
-## Thank you! 
-Please contact us with any questions of issues with this repo. 
-
-This is an Open Source repository. Feel free to fork or clone. 
-All donations will go towards protecting and feeding orphaned baby yodas. 
+- Python
+- Flask
+- Flask-SQLAlchemy
+- SQLite
+- pandas
+- Plotly
+- Leaflet
+- D3
+- Bootstrap
