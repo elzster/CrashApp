@@ -1,1 +1,1 @@
-web: gunicorn nycproject.app:app
+web: gunicorn nycproject.app:app --bind 0.0.0.0:$PORT

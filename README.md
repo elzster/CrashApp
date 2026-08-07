@@ -61,6 +61,18 @@ run_win.bat
 http://127.0.0.1:5000/dash/
 ```
 
+## Render Deployment
+
+This repository includes a `render.yaml` Blueprint for deploying CrashApp as a Render Python web service.
+
+Recommended Render settings:
+
+- Build Command: `pip install --upgrade pip && pip install -r requirements.txt`
+- Start Command: `gunicorn nycproject.app:app --bind 0.0.0.0:$PORT`
+- Python Version: `3.12.13`
+
+The app uses the bundled SQLite database at `nycproject/db/nyc.sqlite`, so no hosted database is required for the current read-only dashboard. If Mapbox tiles need a production token, add `MAPKEY` as an environment variable in Render.
+
 ## Tests
 
 Run the smoke tests with:
