@@ -44,3 +44,37 @@
   background-color: #ffffff;
   background-size: 20px;
 }
+
+@media screen and (max-width: 768px) {
+  #map {
+    border-left: 0;
+    border-radius: 0;
+    border-right: 0;
+    height: 68vh;
+    min-height: 420px;
+  }
+
+  .legend {
+    font-size: 0.78rem;
+    line-height: 18px;
+    max-width: 180px;
+    padding: 8px 10px;
+  }
+
+  .legend h4 {
+    font-size: 0.82rem;
+    margin: 0 0 6px;
+  }
+
+  .legend i {
+    height: 14px;
+    width: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #map {
+    height: 64vh;
+    min-height: 360px;
+  }
+}
