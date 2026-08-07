@@ -169,7 +169,250 @@ body .jumbotron .lead {
   }
 }
 
-img {
-  height: 250px;
-  width: 200px;
+.eyebrow {
+  color: #93c5fd;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.team-section {
+  margin: 0 auto;
+  max-width: 1180px;
+  padding: 46px 28px 64px;
+}
+
+.team-intro {
+  align-items: end;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 440px);
+  margin-bottom: 28px;
+}
+
+.team-intro .eyebrow {
+  color: #2563eb;
+}
+
+.team-intro h2 {
+  color: #111827;
+  font-size: clamp(1.7rem, 3vw, 2.45rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.12;
+  margin: 0;
+}
+
+.team-intro p {
+  color: #4b5563;
+  font-size: 1rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.team-carousel {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 22px 50px rgba(17, 24, 39, 0.08);
+  padding: 36px 72px 56px;
+}
+
+.team-grid {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  min-height: 380px;
+}
+
+.team-card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-height: 360px;
+  padding: 28px;
+}
+
+.team-card-header {
+  align-items: center;
+  display: flex;
+  gap: 18px;
+}
+
+.team-card h3 {
+  color: #111827;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin: 0 0 0.35rem;
+}
+
+.team-card-header p {
+  color: #6b7280;
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+.avatar {
+  align-items: center;
+  background: linear-gradient(135deg, #172033 0%, #344154 100%);
+  border-radius: 50%;
+  color: #ffffff;
+  display: flex;
+  flex: 0 0 68px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  height: 68px;
+  justify-content: center;
+  width: 68px;
+}
+
+.linkedin-card {
+  background: #050505;
+  border-radius: 7px;
+  color: #ffffff;
+  flex: 1;
+  overflow: hidden;
+}
+
+.linkedin-top {
+  background: #374151;
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 800;
+  padding: 12px 16px;
+}
+
+.linkedin-top span {
+  background: #ffffff;
+  border-radius: 2px;
+  color: #374151;
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 1;
+  margin-left: 2px;
+  padding: 1px 3px 2px;
+}
+
+.linkedin-body {
+  padding: 22px 18px 20px;
+}
+
+.linkedin-body strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.linkedin-body p {
+  color: #f3f4f6;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  margin-bottom: 18px;
+  min-height: 58px;
+}
+
+.profile-link {
+  border: 1px solid #ffffff;
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 800;
+  padding: 0.42rem 0.9rem;
+  text-decoration: none;
+}
+
+.profile-link:hover {
+  background: #ffffff;
+  color: #111827;
+  text-decoration: none;
+}
+
+.profile-link.disabled {
+  cursor: default;
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.team-carousel .carousel-control-prev,
+.team-carousel .carousel-control-next {
+  bottom: auto;
+  opacity: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+}
+
+.team-carousel .carousel-control-prev {
+  left: 10px;
+}
+
+.team-carousel .carousel-control-next {
+  right: 10px;
+}
+
+.team-carousel .carousel-control-prev-icon,
+.team-carousel .carousel-control-next-icon {
+  background-color: #111827;
+  background-size: 42%;
+  border-radius: 50%;
+  height: 42px;
+  width: 42px;
+}
+
+.team-carousel .carousel-indicators {
+  bottom: 16px;
+  margin-bottom: 0;
+}
+
+.team-carousel .carousel-indicators li {
+  background-color: #94a3b8;
+  border-radius: 999px;
+  height: 8px;
+  opacity: 1;
+  width: 28px;
+}
+
+.team-carousel .carousel-indicators .active {
+  background-color: #2563eb;
+}
+
+@media screen and (max-width: 900px) {
+  .team-intro {
+    grid-template-columns: 1fr;
+  }
+
+  .team-carousel {
+    padding-left: 54px;
+    padding-right: 54px;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .team-section {
+    padding: 34px 16px 52px;
+  }
+
+  .team-carousel {
+    padding: 24px 18px 54px;
+  }
+
+  .team-card {
+    padding: 22px;
+  }
+
+  .team-carousel .carousel-control-prev,
+  .team-carousel .carousel-control-next {
+    display: none;
+  }
 }

@@ -3,24 +3,11 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Our Analyst Team</title>
+    <title>Analyst Team | CrashApp</title>
 
-    <!--Local CSS Stylesheet-->
     <link rel="stylesheet" href="/static/css/eliestyle.css">
-
-    <!-- Leaflet JS & CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
-        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-        crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
-        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-        crossorigin=""></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
-    <!-- Bootstrap core CSS -->
-
-    <!--BootStrap Dependencies-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -32,9 +19,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+</head>
 
-
-    <!--Top Nav Bar/Drop Downs-->
+<body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="/dash/">CrashApp</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
@@ -44,10 +31,9 @@
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active" style="
-					padding-left: 35px;">
+                <li class="nav-item active">
                     <a class="nav-link" href="/dash/"><button type="button" class="btn btn-secondary">Home <span
-                                class="sr-only">(current)</span></button></button></a>
+                                class="sr-only">(current)</span></button></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/contrib/"><button type="button" class="btn btn-secondary">Previous
@@ -58,72 +44,139 @@
                             Team</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/elzster/project2.git"><button type="button"
+                    <a class="nav-link" href="https://github.com/elzster/CrashApp.git"><button type="button"
                             class="btn btn-secondary">GitHub</button></a>
                 </li>
             </ul>
         </div>
     </nav>
-</head>
 
-<!-- SideBar Container-->
-<div class="sidenav">
-    <a href=/dash>CrashApp </a> 
-    <a href="/clusters/">Incidents Overview</a>
-    <a href="/boroughcomp/">Borough Comparisons</a>
-    <a href="/sunburst/">Borough Comparisons (cont.)</a>
-    <a href="/top10/">Top 10 Roads with Frequency</a>
-    <a href="/heatmap/">HeatMapping</a>
-    <a href="/contrib/">Contributing Factors</a>
-    <a href="/retrieval/">DataRetrieval</a>
-</div>
-</head>
+    <div class="sidenav">
+        <a href="/dash/">CrashApp</a>
+        <a href="/clusters/">Incidents Overview</a>
+        <a href="/boroughcomp/">Borough Comparisons</a>
+        <a href="/sunburst/">Borough Comparisons (cont.)</a>
+        <a href="/top10/">Top 10 Roads with Frequency</a>
+        <a href="/heatmap/">HeatMapping</a>
+        <a href="/contrib/">Contributing Factors</a>
+        <a href="/retrieval/">Data Retrieval</a>
+    </div>
 
-<div class="main">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="jumbotron jumbotron-fluid text-center">
-                <div class="container">
-                    <br>
-                    <h1 class="display-4">Our Analyst Team</h1>
-                    <p class="lead">Just some Introductions to go along with our Conclusion!</a></p>
-                </div>
-            </div>
+    <main class="main">
+        <section class="jumbotron jumbotron-fluid text-center">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <h2>Elie Hakim:<br> Project Lead</h2>
-                        <br>
-                        <img src="/static/mando.png"></div>
-                    <div class="col-md-3">
-                        <h2>Miguel Paxtot:<br> Project Design Engineer</h2>
-                    <br>
-                <img src="/static/scorpion.png"></div>
-                    <div class="col-md-3">
-                        <h2>Jean Pino: <br>Sr. Data Engineer</h2>
-                        <br>
-                        <img src="/static/batman.png"></div>
+                <p class="eyebrow">Project Contributors</p>
+                <h1 class="display-4">Analyst Team</h1>
+                <p class="lead">The CrashApp team combined data engineering, visualization, and product storytelling to turn NYC collision records into a cleaner public-safety analysis experience.</p>
+            </div>
+        </section>
 
-                    <div class="col-md-3">
-                        <h2>Jonathan Rinko:<br> Lead Data Scientist </h2>
-                        <br>
-                        <img src="/static/darth.png"></div>
+        <section class="team-section">
+            <div class="team-intro">
+                <div>
+                    <p class="eyebrow">Built by a cross-functional data team</p>
+                    <h2>From raw collision records to an interactive citywide dashboard.</h2>
+                </div>
+                <p>A focused project team bringing together dashboard design, data engineering, project management, and statistical analysis.</p>
+            </div>
 
-                        <div class="row">
-                            <div class="col-6-md offset-1">
+            <div id="teamCarousel" class="carousel slide team-carousel" data-ride="carousel" data-interval="false">
+                <ol class="carousel-indicators">
+                    <li data-target="#teamCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#teamCarousel" data-slide-to="1"></li>
+                </ol>
 
-                                <!-- <div class="col"></div> -->
-                                <br>
-                            </div>
-                            <div class="col-6-md offset-2">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="team-grid">
+                            <article class="team-card">
+                                <div class="team-card-header">
+                                    <div class="avatar">EH</div>
+                                    <div>
+                                        <h3>Elie Hakim</h3>
+                                        <p>Project Designer</p>
+                                    </div>
+                                </div>
+                                <div class="linkedin-card">
+                                    <div class="linkedin-top">Linked<span>in</span></div>
+                                    <div class="linkedin-body">
+                                        <strong>Elie Hakim</strong>
+                                        <p>Project design, dashboard direction, and analysis delivery.</p>
+                                        <a class="profile-link" href="https://www.linkedin.com/in/hakime1/" target="_blank" rel="noopener">View profile</a>
+                                    </div>
+                                </div>
+                            </article>
 
-                            </div>
+                            <article class="team-card">
+                                <div class="team-card-header">
+                                    <div class="avatar">MP</div>
+                                    <div>
+                                        <h3>Miguel Paxtot</h3>
+                                        <p>Project Manager</p>
+                                    </div>
+                                </div>
+                                <div class="linkedin-card">
+                                    <div class="linkedin-top">Linked<span>in</span></div>
+                                    <div class="linkedin-body">
+                                        <strong>Miguel Paxtot</strong>
+                                        <p>Project coordination, analysis planning, and delivery support.</p>
+                                        <a class="profile-link" href="https://www.linkedin.com/in/mpatxot" target="_blank" rel="noopener">View profile</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="team-grid">
+                            <article class="team-card">
+                                <div class="team-card-header">
+                                    <div class="avatar">JP</div>
+                                    <div>
+                                        <h3>Jean Pino</h3>
+                                        <p>Data Engineer</p>
+                                    </div>
+                                </div>
+                                <div class="linkedin-card">
+                                    <div class="linkedin-top">Linked<span>in</span></div>
+                                    <div class="linkedin-body">
+                                        <strong>Jean Pino</strong>
+                                        <p>Data modeling, source preparation, and analytical query support.</p>
+                                        <a class="profile-link" href="https://www.linkedin.com/in/jeancpino" target="_blank" rel="noopener">View profile</a>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="team-card">
+                                <div class="team-card-header">
+                                    <div class="avatar">JR</div>
+                                    <div>
+                                        <h3>Jonathan Rinko</h3>
+                                        <p>Lead Data Scientist</p>
+                                    </div>
+                                </div>
+                                <div class="linkedin-card">
+                                    <div class="linkedin-top">Linked<span>in</span></div>
+                                    <div class="linkedin-body">
+                                        <strong>Jonathan Rinko</strong>
+                                        <p>Crash-pattern analysis, statistical framing, and insight validation.</p>
+                                        <a class="profile-link" href="https://www.linkedin.com/in/jonathan-rinko" target="_blank" rel="noopener">View profile</a>
+                                    </div>
+                                </div>
+                            </article>
                         </div>
                     </div>
                 </div>
+
+                <a class="carousel-control-prev" href="#teamCarousel" role="button" data-slide="prev" aria-label="Previous team members">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next" href="#teamCarousel" role="button" data-slide="next" aria-label="Next team members">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 </body>
 
 </html>
