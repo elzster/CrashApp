@@ -73,6 +73,27 @@ Recommended Render settings:
 
 The app uses the bundled SQLite database at `nycproject/db/nyc.sqlite`, so no hosted database is required for the current read-only dashboard. If Mapbox tiles need a production token, add `MAPKEY` as an environment variable in Render.
 
+## Updating the Data
+
+CrashApp uses a normalized SQLite table named `crash`. NYC Open Data CSV exports have a wider raw schema, so rebuild the app-ready SQLite database with:
+
+```bash
+python scripts/build_crash_sqlite.py "path/to/Motor_Vehicle_Collisions_-_Crashes.csv" --output nycproject/db/nyc_2025.sqlite
+```
+
+Review the printed row counts and borough counts. When the new database looks correct, replace `nycproject/db/nyc.sqlite` with the generated file.
+
+If the CSV has blank borough values, infer missing boroughs from latitude/longitude with:
+
+```bash
+python scripts/infer_missing_boroughs.py --db nycproject/db/nyc_2025.sqlite
+```
+
+The map pages use database-backed JSON endpoints:
+
+- `/map-crashes/` returns grouped GeoJSON points for marker clusters.
+- `/heatmap-points/` returns lightweight `[latitude, longitude]` pairs for heatmaps.
+
 ## Tests
 
 Run the smoke tests with:

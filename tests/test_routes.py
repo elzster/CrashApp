@@ -31,6 +31,8 @@ class RouteSmokeTests(unittest.TestCase):
     def test_json_routes_load(self):
         routes = [
             "/geojson/",
+            "/map-crashes/?decimals=2",
+            "/heatmap-points/",
             "/bounds/",
             "/datafile1/",
             "/borough/",

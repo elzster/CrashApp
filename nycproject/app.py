@@ -6,9 +6,9 @@ import plotly.graph_objects as go
 import plotly.io as pio
 from plotly.subplots import make_subplots
 from flask import json
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import func, or_
+from sqlalchemy import Float, cast, func, or_
 
 #################################################
 # Flask Setup
@@ -339,6 +339,103 @@ def build_sunburst_html(stats):
     return plotly_html(fig)
 
 
+def valid_map_rows_query():
+    latitude = cast(crashdata.latitude, Float)
+    longitude = cast(crashdata.longitude, Float)
+    return db.session.query(crashdata).filter(
+        crashdata.latitude.isnot(None),
+        crashdata.longitude.isnot(None),
+        crashdata.latitude != "",
+        crashdata.longitude != "",
+        latitude.between(40.3, 41.0),
+        longitude.between(-74.3, -73.6),
+        crashdata.borough.in_(["Bronx", "Brooklyn", "Manhattan", "Queens", "Staten Island"]),
+    )
+
+
+def crash_to_geojson_feature(crash):
+    latitude = float(crash.latitude)
+    longitude = float(crash.longitude)
+    return {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [longitude, latitude],
+        },
+        "properties": {
+            "id": crash.id,
+            "cartodb_id": crash.cartodbid,
+            "socrata_id": crash.socrata_id,
+            "on_street_name": crash.on_street_name or "",
+            "cross_street_name": crash.cross_street_name or "",
+            "date_time": crash.date_time or "",
+            "latitude": latitude,
+            "longitude": longitude,
+            "borough": crash.borough or "",
+            "zip_code": crash.zip_code or "",
+            "crash_count": 1,
+            "number_of_cyclist_injured": crash.number_of_cyclist_injured or 0,
+            "number_of_cyclist_killed": crash.number_of_cyclist_killed or 0,
+            "number_of_motorist_injured": crash.number_of_motorist_injured or 0,
+            "number_of_motorist_killed": crash.number_of_motorist_killed or 0,
+            "number_of_pedestrian_injured": crash.number_of_pedestrian_injured or 0,
+            "number_of_pedestrian_killed": crash.number_of_pedestrian_killed or 0,
+            "number_of_persons_injured": crash.number_of_persons_injured or 0,
+            "number_of_persons_killed": crash.number_of_persons_killed or 0,
+            "contributing_factors": crash.contributing_factors or "",
+            "vehicle_types": crash.vehicle_types or "",
+        },
+    }
+
+
+def map_cluster_features(decimal_places=3):
+    latitude = cast(crashdata.latitude, Float)
+    longitude = cast(crashdata.longitude, Float)
+    rounded_latitude = func.round(latitude, decimal_places).label("latitude")
+    rounded_longitude = func.round(longitude, decimal_places).label("longitude")
+
+    rows = db.session.query(
+        rounded_latitude,
+        rounded_longitude,
+        crashdata.borough.label("borough"),
+        func.count(crashdata.id).label("crash_count"),
+        func.coalesce(func.sum(crashdata.number_of_persons_injured), 0).label("injured"),
+        func.coalesce(func.sum(crashdata.number_of_persons_killed), 0).label("killed"),
+        func.min(crashdata.on_street_name).label("sample_road"),
+        func.min(crashdata.contributing_factors).label("sample_factors"),
+        func.min(crashdata.vehicle_types).label("sample_vehicle_types"),
+    ).filter(
+        crashdata.latitude.isnot(None),
+        crashdata.longitude.isnot(None),
+        crashdata.latitude != "",
+        crashdata.longitude != "",
+        latitude.between(40.3, 41.0),
+        longitude.between(-74.3, -73.6),
+        crashdata.borough.in_(["Bronx", "Brooklyn", "Manhattan", "Queens", "Staten Island"]),
+    ).group_by(
+        rounded_latitude,
+        rounded_longitude,
+        crashdata.borough,
+    ).all()
+
+    return [{
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [float(row.longitude), float(row.latitude)],
+        },
+        "properties": {
+            "borough": row.borough,
+            "on_street_name": row.sample_road or "",
+            "crash_count": int(row.crash_count or 0),
+            "number_of_persons_injured": int(row.injured or 0),
+            "number_of_persons_killed": int(row.killed or 0),
+            "contributing_factors": row.sample_factors or "",
+            "vehicle_types": row.sample_vehicle_types or "",
+        },
+    } for row in rows]
+
+
 ###############################################
 #########Html Routes for Web Server ###########
 ###############################################
@@ -462,6 +559,32 @@ def showjson():
         data = json.load(test_file)
         
         return (data)
+
+
+@app.route("/map-crashes/")
+def map_crashes():
+    """Return database-backed grouped GeoJSON points for marker clusters."""
+    decimals = request.args.get("decimals", default=3, type=int)
+    decimals = min(max(decimals, 2), 5)
+    features = map_cluster_features(decimals)
+    return jsonify({
+        "type": "FeatureCollection",
+        "features": features,
+    })
+
+
+@app.route("/heatmap-points/")
+def heatmap_points():
+    """Return lightweight database-backed points for Leaflet heat layers."""
+    query = valid_map_rows_query()
+
+    borough = request.args.get("borough")
+    if borough:
+        query = query.filter(crashdata.borough == title_case(borough))
+
+    rows = query.with_entities(crashdata.latitude, crashdata.longitude).all()
+    points = [[float(latitude), float(longitude)] for latitude, longitude in rows]
+    return jsonify(points)
 ################################################
 ####Route for Cloropleth Data File Needed  #####
 ################################################
