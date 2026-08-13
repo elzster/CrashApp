@@ -139,8 +139,7 @@ var baseMaps = {
 // #############################################################
 // Creating -  URLs
 // #############################################################
-// var url = "/nycproject/static/js/cartodb.geojson";
-var url = `/geojson/`;
+var heatmapUrl = `/heatmap-points/`;
 
 // var link = "/nycproject/data/nyc.geojson";
 var link = `/bounds/`;
@@ -205,22 +204,7 @@ var cityBoundary = new L.layerGroup(layerBoroughBoundaries)
 // #############################################################
 // Creating - Boroughs Heat Map - 2nd Layer
 // #############################################################
-var layerHeatMap = d3.json(url).then(function(response) {
-    
-    var heatArray = [];
-
-    // console.log(response)
-    
-    for(var i = 0; i < response.features.length; i++) {
-        var location = response.features[i];
-
-        // console.log(location);
-
-        if (location && location.geometry && location.properties.borough) {
-            heatArray.push([location.geometry.coordinates[1], location.geometry.coordinates[0]])
-        }
-    }
-
+var layerHeatMap = d3.json(heatmapUrl).then(function(heatArray) {
     var heat = L.heatLayer(heatArray, {
         radius: 60,
         max: 1, 
