@@ -69,8 +69,8 @@ var beltParkway = L.marker([40.645, -73.875], {icon: roadIcon}).bindPopup("<h1>B
     lindenBoulevard = L.marker([40.655, -73.902], {icon: roadIcon}).bindPopup("<h1>Linden Boulevard</h1>"),
     fdrDrive = L.marker([40.747, -73.968], {icon: roadIcon}).bindPopup("<h1>FDR Drive</h1>"),
     broadway = L.marker([40.761, -73.986], {icon: roadIcon}).bindPopup("<h1>Broadway</h1>"),
-    crossIslandParkway = L.marker([40.788, -73.790], {icon: roadIcon}).bindPopup("<h1>Cross Island Parkway</h1>")
-    longIslandExpressway = L.marker([40.743, -73.837], {icon: roadIcon}).bindPopup("<h1>Long Island Expressway</h1>");
+    crossIslandParkway = L.marker([40.788, -73.790], {icon: roadIcon}).bindPopup("<h1>Cross Island Parkway</h1>"),
+    longIslandExpressway = L.marker([40.743, -73.837], {icon: roadIcon}).bindPopup("<h1>Long Island Expressway</h1>"),
     uticaAvenue = L.marker([40.668, -73.931], {icon: roadIcon}).bindPopup("<h1>Utica Avenue</h1>");
 
 var topTen = L.layerGroup([beltParkway, grandCentralParkway, lindenBoulevard, fdrDrive, broadway, 
@@ -140,9 +140,10 @@ var baseMaps = {
 // Creating -  URLs
 // #############################################################
 var heatmapUrl = `/heatmap-points/`;
-
-// var link = "/nycproject/data/nyc.geojson";
 var link = `/bounds/`;
+var heatLayer = null;
+var cityHeatMap = L.layerGroup();
+var cityBoundary = L.layerGroup();
 
 // #############################################################
 // Creating -  Borough Boundaries - 1st Layer
@@ -196,23 +197,8 @@ var layerBoroughBoundaries = d3.json(link).then(function(data) {
                 // layer.bindPopup(feature.properties.ZIP + 
                 // feature.properties.boroughs)
         }
-    }).addTo(myMap);
+    }).addTo(cityBoundary);
 });
-
-var cityBoundary = new L.layerGroup(layerBoroughBoundaries)
-
-// #############################################################
-// Creating - Boroughs Heat Map - 2nd Layer
-// #############################################################
-var layerHeatMap = d3.json(heatmapUrl).then(function(heatArray) {
-    var heat = L.heatLayer(heatArray, {
-        radius: 60,
-        max: 1, 
-        blur: 8 
-    }).addTo(myMap);
-});
-
-var cityHeatMap = new L.layerGroup(layerHeatMap);
 
 // #############################################################
 // Creating -  myMap with Layers
@@ -223,9 +209,57 @@ var myMap = L.map("map", {
     layers: [
         tileLayerDark,
         cityHeatMap,
-        cityBoundary
+        cityBoundary,
+        boroughMarkers
     ]
 });
+
+// #############################################################
+// Creating - Boroughs Heat Map - 2nd Layer
+// #############################################################
+function selectedHeatmapUrl() {
+    var scope = document.getElementById("heatmapScope").value;
+    var month = document.getElementById("heatmapMonth").value;
+    var params = new URLSearchParams({ scope: scope });
+
+    if (month) {
+        params.set("month", month);
+    }
+
+    return heatmapUrl + "?" + params.toString();
+}
+
+function updateHeatmapSummary(message) {
+    var summary = document.getElementById("heatmapSummary");
+
+    if (summary) {
+        summary.textContent = message;
+    }
+}
+
+function loadHeatmap() {
+    updateHeatmapSummary("Loading data");
+
+    return d3.json(selectedHeatmapUrl()).then(function(heatArray) {
+        if (heatLayer) {
+            cityHeatMap.removeLayer(heatLayer);
+        }
+
+        heatLayer = L.heatLayer(heatArray, {
+            radius: 46,
+            max: 1,
+            blur: 12,
+            minOpacity: 0.35
+        });
+
+        cityHeatMap.addLayer(heatLayer);
+        updateHeatmapSummary(heatArray.length.toLocaleString() + " crashes");
+    }).catch(function() {
+        updateHeatmapSummary("Data unavailable");
+    });
+}
+
+loadHeatmap();
 
 // #############################################################
 // Creating -  overlayMaps for HeatMaps and Boundaries
@@ -241,6 +275,9 @@ var overlayMaps = {
 // Creating - layer control for myMap
 // #############################################################
 L.control.layers(baseMaps, overlayMaps).addTo(myMap);
+
+document.getElementById("heatmapScope").addEventListener("change", loadHeatmap);
+document.getElementById("heatmapMonth").addEventListener("change", loadHeatmap);
 
 
 // #############################################################

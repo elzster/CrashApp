@@ -30,9 +30,61 @@
             text-align: center;
         }
 
+        .heatmap-controls {
+            align-items: end;
+            display: grid;
+            gap: 16px;
+            grid-template-columns: minmax(180px, 1fr) minmax(180px, 1fr) auto;
+            margin: 0 0 20px;
+        }
+
+        .heatmap-controls label {
+            color: #111827;
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .heatmap-controls select {
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            color: #111827;
+            height: 44px;
+            padding: 0 12px;
+            width: 100%;
+        }
+
+        .heatmap-summary {
+            background: #111827;
+            border-radius: 6px;
+            color: #ffffff;
+            font-weight: 700;
+            min-width: 155px;
+            padding: 11px 14px;
+            text-align: center;
+        }
+
+        .top-roads-note {
+            color: #4b5563;
+            font-size: 0.92rem;
+            margin: -4px 0 18px;
+            text-align: center;
+        }
+
         @media (max-width: 640px) {
             .map-shell {
                 padding: 16px;
+            }
+
+            .heatmap-controls {
+                grid-template-columns: 1fr;
+            }
+
+            .heatmap-summary {
+                width: 100%;
             }
         }
     </style>
@@ -83,7 +135,29 @@
 
         <section class="map-shell">
             <p class="map-note">
-                Heat intensity shows where crash records concentrate. Toggle map layers to compare heat density, borough boundaries, roadway markers, and base map styles.
+                Heat intensity shows where crash records concentrate. Start with the top roadway corridors for a cleaner signal, then compare all mapped crashes or individual months.
+            </p>
+            <div class="heatmap-controls" aria-label="Heatmap filters">
+                <div>
+                    <label for="heatmapScope">Data scope</label>
+                    <select id="heatmapScope">
+                        <option value="top10" selected>Top 10 roadways</option>
+                        <option value="all">All mapped crashes</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="heatmapMonth">Month</label>
+                    <select id="heatmapMonth">
+                        <option value="">All months</option>
+                        {% for month in month_options %}
+                        <option value="{{ month.value }}">{{ month.label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="heatmap-summary" id="heatmapSummary">Loading data</div>
+            </div>
+            <p class="top-roads-note">
+                Current top roadway set: {{ top_roads|join(", ") }}.
             </p>
             <div id="map"></div>
         </section>

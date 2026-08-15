@@ -114,6 +114,42 @@ def get_top_roads_stats(limit=10):
     } for row in rows]
 
 
+def get_top_road_names(limit=10):
+    rows = db.session.query(
+        crashdata.on_street_name.label("road"),
+        func.count(crashdata.id).label("crashes"),
+    ).filter(
+        crashdata.on_street_name.isnot(None),
+        crashdata.on_street_name != "",
+    ).group_by(
+        crashdata.on_street_name
+    ).order_by(
+        func.count(crashdata.id).desc()
+    ).limit(limit).all()
+
+    return [row.road for row in rows]
+
+
+def get_heatmap_month_options():
+    rows = db.session.query(
+        func.substr(crashdata.date_time, 1, 7).label("month"),
+        func.count(crashdata.id).label("crashes"),
+    ).filter(
+        crashdata.date_time.isnot(None),
+        crashdata.date_time != "",
+    ).group_by(
+        func.substr(crashdata.date_time, 1, 7)
+    ).order_by(
+        func.substr(crashdata.date_time, 1, 7)
+    ).all()
+
+    return [{
+        "value": row.month,
+        "label": pd.to_datetime(f"{row.month}-01").strftime("%B %Y"),
+        "crashes": int(row.crashes or 0),
+    } for row in rows if row.month]
+
+
 def get_contributing_factor_stats(limit=10):
     rows = db.session.query(
         crashdata.contributing_factors,
@@ -479,7 +515,11 @@ def scope():
 ###HeatMap Page###
 @app.route("/heatmap/")
 def heatmap():
-    return render_template("heatmap.html")
+    return render_template(
+        "heatmap.html",
+        month_options=get_heatmap_month_options(),
+        top_roads=[title_case(road) for road in get_top_road_names()],
+    )
 ###Top 10 Roads Page###
 @app.route("/top10/")
 def bargraph():
@@ -581,6 +621,15 @@ def heatmap_points():
     borough = request.args.get("borough")
     if borough:
         query = query.filter(crashdata.borough == title_case(borough))
+
+    month = request.args.get("month", "").strip()
+    if month:
+        query = query.filter(func.substr(crashdata.date_time, 1, 7) == month)
+
+    scope = request.args.get("scope", "top10").strip().lower()
+    if scope == "top10":
+        top_roads = get_top_road_names()
+        query = query.filter(crashdata.on_street_name.in_(top_roads))
 
     rows = query.with_entities(crashdata.latitude, crashdata.longitude).all()
     points = [[float(latitude), float(longitude)] for latitude, longitude in rows]
