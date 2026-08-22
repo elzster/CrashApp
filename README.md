@@ -1,6 +1,6 @@
 # CrashApp
 
-CrashApp is a Flask dashboard for exploring NYC motor vehicle collision data. It uses a bundled SQLite dataset for November 2019 and presents the analysis through interactive maps, borough comparisons, ranked roadway charts, contributing-factor charts, and Python-built Plotly visualizations.
+CrashApp is a Flask dashboard for exploring NYC motor vehicle collision data. It uses a bundled SQLite dataset for November 2025 and presents the analysis through interactive maps, borough comparisons, ranked roadway charts, contributing-factor charts, and Python-built Plotly visualizations.
 
 ## Data Source
 
