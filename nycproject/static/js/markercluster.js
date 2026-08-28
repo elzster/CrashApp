@@ -16,26 +16,62 @@ L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/
 }).addTo(myMap);
 
 var clusterPrecision = window.innerWidth < 768 ? 2 : 3;
-var url = `/map-crashes/?decimals=${clusterPrecision}`;
+var markers = L.markerClusterGroup();
 
-d3.json(url).then( function(response) {
-    var markers = L.markerClusterGroup();
+myMap.addLayer(markers);
 
-    for(var i = 0; i < response.features.length; i++) {
-        var location = response.features[i];
+function selectedClusterUrl() {
+    var monthSelect = document.getElementById("clusterMonth");
+    var params = new URLSearchParams({ decimals: clusterPrecision });
 
-        if (location && location.geometry && location.properties.borough) {
-            markers.addLayer(L.marker([location.geometry.coordinates[1], location.geometry.coordinates[0]])
-            
-                .bindPopup("Borough: " + location.properties.borough + "<hr>" + 
-                "Crash Count: " + location.properties.crash_count + "<hr>" +
-                "People Injured: " + location.properties.number_of_persons_injured + "<hr>" +
-                "Fatalities: " + location.properties.number_of_persons_killed + "<hr>" +
-                "Sample Road: " + location.properties.on_street_name + "<hr>" +
-                "Contributing Factors: " + location.properties.contributing_factors + "<hr>" +
-                "Vehicle Type: " + location.properties.vehicle_types));
-        }
+    if (monthSelect && monthSelect.value) {
+        params.set("month", monthSelect.value);
     }
 
-    myMap.addLayer(markers);
-});
+    return "/map-crashes/?" + params.toString();
+}
+
+function updateClusterSummary(message) {
+    var summary = document.getElementById("clusterSummary");
+
+    if (summary) {
+        summary.textContent = message;
+    }
+}
+
+function loadClusters() {
+    updateClusterSummary("Loading data");
+    markers.clearLayers();
+
+    return d3.json(selectedClusterUrl()).then(function(response) {
+        var crashTotal = 0;
+        for(var i = 0; i < response.features.length; i++) {
+            var location = response.features[i];
+
+            if (location && location.geometry && location.properties.borough) {
+                crashTotal += location.properties.crash_count || 0;
+                markers.addLayer(L.marker([location.geometry.coordinates[1], location.geometry.coordinates[0]])
+                
+                    .bindPopup("Borough: " + location.properties.borough + "<hr>" + 
+                    "Crash Count: " + location.properties.crash_count + "<hr>" +
+                    "People Injured: " + location.properties.number_of_persons_injured + "<hr>" +
+                    "Fatalities: " + location.properties.number_of_persons_killed + "<hr>" +
+                    "Sample Road: " + location.properties.on_street_name + "<hr>" +
+                    "Contributing Factors: " + location.properties.contributing_factors + "<hr>" +
+                    "Vehicle Type: " + location.properties.vehicle_types));
+            }
+        }
+
+        updateClusterSummary(crashTotal.toLocaleString() + " crashes");
+    }).catch(function() {
+        updateClusterSummary("Data unavailable");
+    });
+}
+
+loadClusters();
+
+var clusterMonth = document.getElementById("clusterMonth");
+
+if (clusterMonth) {
+    clusterMonth.addEventListener("change", loadClusters);
+}

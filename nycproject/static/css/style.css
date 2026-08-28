@@ -30,6 +30,10 @@ body {
   padding: 0.2rem;
 }
 
+.navbar .navbar-collapse {
+  gap: 0.75rem;
+}
+
 .navbar .btn-secondary {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -47,6 +51,12 @@ body {
   border-color: rgba(255, 255, 255, 0.24);
   color: #ffffff;
   box-shadow: none;
+}
+
+.navbar .nav-item.active .btn-secondary {
+  background: rgba(249, 115, 22, 0.14);
+  border-color: rgba(249, 115, 22, 0.5);
+  color: #ffffff;
 }
 
 .sidenav {
@@ -105,17 +115,11 @@ body {
 .main {
   box-sizing: border-box;
   font-size: 1rem;
-  margin-left: 18px;
+  margin-left: 0;
   overflow-x: hidden;
   padding: 0 10px 40px;
   transition: margin-left 180ms ease, width 180ms ease;
-  width: calc(100% - 18px);
-}
-
-.sidenav:hover ~ .main,
-.sidenav:focus-within ~ .main {
-  margin-left: 230px;
-  width: calc(100% - 230px);
+  width: 100%;
 }
 
 body .jumbotron {
@@ -152,7 +156,7 @@ body .jumbotron .lead {
   .sidenav a {font-size: 0.9rem;}
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 991px) {
   .navbar.fixed-top.bg-dark {
     min-height: 56px;
     padding: 0.45rem 0.85rem;
@@ -177,7 +181,9 @@ body .jumbotron .lead {
     text-align: left;
     width: 100%;
   }
+}
 
+@media screen and (max-width: 768px) {
   .sidenav {
     align-items: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);

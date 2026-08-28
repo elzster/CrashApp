@@ -232,7 +232,7 @@ def build_borough_comparison_html(stats):
     ), secondary_y=True)
 
     fig.update_layout(
-        title={"text": "Crashes, Injuries, and Fatalities by Borough", "x": 0.5, "xanchor": "center"},
+        title={"text": "2025 Crashes, Injuries, and Fatalities by Borough", "x": 0.5, "xanchor": "center"},
         barmode="group",
         height=560,
         legend={"orientation": "h", "x": 0.5, "xanchor": "center", "y": 1.06},
@@ -265,7 +265,7 @@ def build_road_user_comparison_html(stats):
         ))
 
     fig.update_layout(
-        title={"text": "Who Was Affected in Each Borough", "x": 0.5, "xanchor": "center"},
+        title={"text": "Who Was Affected in Each Borough in 2025", "x": 0.5, "xanchor": "center"},
         barmode="stack",
         height=500,
         legend={"orientation": "h", "x": 0.5, "xanchor": "center", "y": 1.08},
@@ -299,7 +299,7 @@ def build_sunburst_html(stats):
     ids = ["root"]
     parents = [""]
     values = [sum(item["total_casualties"] for item in stats)]
-    customdata = [["All boroughs", "Reported injuries and fatalities", values[0], ""]]
+    customdata = [["All boroughs", "2025 reported injuries and fatalities", values[0], ""]]
 
     for item in stats:
         borough_id = item["borough"]
@@ -361,7 +361,7 @@ def build_sunburst_html(stats):
 
     fig.update_layout(
         title={
-            "text": "Injuries and Fatalities by Borough and Road User",
+            "text": "2025 Injuries and Fatalities by Borough and Road User",
             "x": 0.5,
             "xanchor": "center",
         },
@@ -424,13 +424,13 @@ def crash_to_geojson_feature(crash):
     }
 
 
-def map_cluster_features(decimal_places=3):
+def map_cluster_features(decimal_places=3, month=None):
     latitude = cast(crashdata.latitude, Float)
     longitude = cast(crashdata.longitude, Float)
     rounded_latitude = func.round(latitude, decimal_places).label("latitude")
     rounded_longitude = func.round(longitude, decimal_places).label("longitude")
 
-    rows = db.session.query(
+    query = db.session.query(
         rounded_latitude,
         rounded_longitude,
         crashdata.borough.label("borough"),
@@ -448,7 +448,12 @@ def map_cluster_features(decimal_places=3):
         latitude.between(40.3, 41.0),
         longitude.between(-74.3, -73.6),
         crashdata.borough.in_(["Bronx", "Brooklyn", "Manhattan", "Queens", "Staten Island"]),
-    ).group_by(
+    )
+
+    if month:
+        query = query.filter(func.substr(crashdata.date_time, 1, 7) == month)
+
+    rows = query.group_by(
         rounded_latitude,
         rounded_longitude,
         crashdata.borough,
@@ -531,7 +536,7 @@ def bargraph():
         roads=roads,
         total_crashes=total_crashes,
         top_road=top_road,
-        roads_chart=build_horizontal_bar_html(roads, "road", "crashes", "Top 10 Roads by Crash Frequency", "#2563eb"),
+        roads_chart=build_horizontal_bar_html(roads, "road", "crashes", "2025 Top 10 Roads by Crash Frequency", "#2563eb"),
     )
 
 ###Contributing Factors Page###
@@ -545,7 +550,7 @@ def contrib():
         factors=factors,
         total_crashes=total_crashes,
         top_factor=top_factor,
-        factors_chart=build_horizontal_bar_html(factors, "factor", "crashes", "Top Contributing Factors", "#f97316"),
+        factors_chart=build_horizontal_bar_html(factors, "factor", "crashes", "2025 Top Contributing Factors", "#f97316"),
     )
 
 @app.route("/retrieval/")
@@ -555,8 +560,7 @@ def retrieval():
 
 @app.route("/clusters/")
 def clusters():
-    
-    return render_template('clusters.html')
+    return render_template('clusters.html', month_options=get_heatmap_month_options())
 
 @app.route("/team/")
 def team():
@@ -606,7 +610,8 @@ def map_crashes():
     """Return database-backed grouped GeoJSON points for marker clusters."""
     decimals = request.args.get("decimals", default=3, type=int)
     decimals = min(max(decimals, 2), 5)
-    features = map_cluster_features(decimals)
+    month = request.args.get("month", "").strip()
+    features = map_cluster_features(decimals, month or None)
     return jsonify({
         "type": "FeatureCollection",
         "features": features,

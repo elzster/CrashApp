@@ -22,47 +22,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="/dash/">CrashApp</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/dash/"><button type="button" class="btn btn-secondary">Home <span
-                                class="sr-only">(current)</span></button></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contrib/"><button type="button" class="btn btn-secondary">Previous
-                            Page</button></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/team/"><button type="button" class="btn btn-secondary">Analyst
-                            Team</button></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/elzster/CrashApp.git"><button type="button"
-                            class="btn btn-secondary">GitHub</button></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="sidenav">
-        <a href="/dash/">CrashApp</a>
-        <a href="/clusters/">Incidents Overview</a>
-        <a href="/boroughcomp/">Borough Comparisons</a>
-        <a href="/sunburst/">Borough Comparisons (cont.)</a>
-        <a href="/top10/">Top 10 Roads with Frequency</a>
-        <a href="/heatmap/">HeatMapping</a>
-        <a href="/contrib/">Contributing Factors</a>
-        <a href="/retrieval/">Data Retrieval</a>
-    </div>
-
-    <main class="main">
+    {% include '_navbar.html' %}
+<main class="main">
         <section class="jumbotron jumbotron-fluid text-center">
             <div class="container">
                 <p class="eyebrow">Project Contributors</p>

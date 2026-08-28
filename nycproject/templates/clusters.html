@@ -32,62 +32,84 @@
             text-align: center;
         }
 
+        .cluster-controls {
+            align-items: end;
+            display: grid;
+            gap: 16px;
+            grid-template-columns: minmax(220px, 1fr) auto;
+            margin: 0 0 20px;
+        }
+
+        .cluster-controls label {
+            color: #111827;
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .cluster-controls select {
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            color: #111827;
+            height: 44px;
+            padding: 0 12px;
+            width: 100%;
+        }
+
+        .cluster-summary {
+            background: #111827;
+            border-radius: 6px;
+            color: #ffffff;
+            font-weight: 700;
+            min-width: 170px;
+            padding: 11px 14px;
+            text-align: center;
+        }
+
         @media (max-width: 640px) {
             .map-shell {
                 padding: 16px;
+            }
+
+            .cluster-controls {
+                grid-template-columns: 1fr;
+            }
+
+            .cluster-summary {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="/dash/">CrashApp</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active" style="padding-left: 35px;">
-                    <a class="nav-link" href="/dash/"><button type="button" class="btn btn-secondary">Home <span class="sr-only">(current)</span></button></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/dash/"><button type="button" class="btn btn-secondary">Previous Page</button></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/boroughcomp/"><button type="button" class="btn btn-secondary">Next Page</button></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/elzster/project2.git"><button type="button" class="btn btn-secondary">GitHub</button></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="sidenav">
-        <a href="/dash/">CrashApp</a>
-        <a href="/clusters/">Incidents Overview</a>
-        <a href="/boroughcomp/">Borough Comparisons</a>
-        <a href="/sunburst/">Borough Comparisons (cont.)</a>
-        <a href="/top10/">Top 10 Roads with Frequency</a>
-        <a href="/heatmap/">HeatMapping</a>
-        <a href="/contrib/">Contributing Factors</a>
-        <a href="/retrieval/">Data Retrieval</a>
-    </div>
-
-    <main class="main">
+    {% include '_navbar.html' %}
+<main class="main">
         <section class="jumbotron jumbotron-fluid text-center">
             <div class="container" style="margin-top: 35px;">
                 <h1 class="display-4">Incident Clusters Overview</h1>
-                <p class="lead">A map-based view of crash concentration across NYC, grouped into clusters for easier scanning.</p>
+                <p class="lead">A map-based view of 2025 crash concentration across NYC, grouped into clusters for easier scanning.</p>
             </div>
         </section>
 
         <section class="map-shell">
             <p class="map-note">
-                Cluster markers reveal where incidents concentrate at a citywide level. Zoom in to separate grouped markers and inspect individual crash locations.
+                Cluster markers reveal where 2025 incidents concentrate at a citywide level. Filter by month to compare seasonal shifts and make dense areas easier to inspect.
             </p>
+            <div class="cluster-controls" aria-label="Cluster filters">
+                <div>
+                    <label for="clusterMonth">Month</label>
+                    <select id="clusterMonth">
+                        <option value="">All months</option>
+                        {% for month in month_options %}
+                        <option value="{{ month.value }}">{{ month.label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="cluster-summary" id="clusterSummary">Loading data</div>
+            </div>
             <div id="map"></div>
         </section>
     </main>

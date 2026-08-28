@@ -18,17 +18,17 @@ nycproject/db/nyc.sqlite
 - Modern Flask app with SQLite-backed routes
 - Python-generated Plotly charts for borough, roadway, contributing-factor, and sunburst views
 - Leaflet maps for incident clusters and crash heatmaps
-- Responsive dark navigation and auto-collapsing side rail
+- Responsive dark navigation with a shared top navigation bar
 - Smoke tests for key HTML and JSON routes
 
 ## Main Pages
 
 - `/dash/` - Landing page and project overview
-- `/clusters/` - Incident cluster map
+- `/clusters/` - 2025 incident cluster map with month filtering
 - `/boroughcomp/` - Borough comparison charts
 - `/sunburst/` - Borough outcome sunburst
 - `/top10/` - Top crash-frequency roads
-- `/heatmap/` - Crash density heatmap
+- `/heatmap/` - 2025 crash density heatmap with month and scope filtering
 - `/contrib/` - Top contributing factors
 - `/retrieval/` - Data retrieval notes and API examples
 - `/team/` - Project team page
@@ -104,7 +104,7 @@ python -m unittest discover -s tests
 
 ## Maintenance Notes
 
-This project was originally built in 2019 and has since been updated to run on modern Flask, Flask-SQLAlchemy, SQLAlchemy, pandas, NumPy, and Plotly. The current UI refresh keeps the original data story while replacing much of the older hardcoded JavaScript charting with Python-generated visualizations.
+This project was originally built in 2019 and has since been updated with 2025 crash data and a modern Flask, Flask-SQLAlchemy, SQLAlchemy, pandas, NumPy, and Plotly stack. The current UI refresh keeps the original data story while replacing much of the older hardcoded JavaScript charting with Python-generated visualizations.
 
 ## Tech Stack
 

@@ -32,6 +32,7 @@ class RouteSmokeTests(unittest.TestCase):
         routes = [
             "/geojson/",
             "/map-crashes/?decimals=2",
+            "/map-crashes/?decimals=2&month=2025-01",
             "/heatmap-points/",
             "/heatmap-points/?scope=top10",
             "/heatmap-points/?scope=top10&month=2025-01",
